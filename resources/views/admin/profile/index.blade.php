@@ -17,7 +17,7 @@
         <div class="col-xl-12 col-lg-6 ">
           <div class="card h-auto">
             <div class="card-body text-center">
-              <img src="images/avatar/1.jpg" width="150" class="rounded-circle mb-4" alt="" />
+              <img src="images/avatar/1.jpg" width="150" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
               <h4 class="mb-3 text-black font-w600">James Witwitcky</h4>
 
               <table class="table">
@@ -141,7 +141,7 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label>Foto</label>
-                            <div class="custom-file">
+                            <div class="input-group">
                               <input type="file" class="custom-file-input">
                               <label class="custom-file-label">Pilih file foto</label>
                             </div>

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="/vendor/chartist/css/chartist.min.css">
   <link href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
   <link href="/css/style.css" rel="stylesheet">
+
   <!-- <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet"> -->
 </head>
 
@@ -237,10 +238,10 @@
             </a>
           </li>
         </ul>
-        <!-- <p class="copyright"><strong>E-Skripsi | Unirow Tuban </strong><br>Versi 1.0</p> -->
-      </div>
-      <div class="copyright fixed-bottom mb-0">
-        <p><strong>E-Skripsi | Unirow Tuban </strong><br>Versi 1.0</p>
+        <div class="copyright fixed-bottom hide-on-desktop mb-0 ">
+          <p><strong>E-Skripsi | Unirow Tuban </strong><br>Versi 1.0</p>
+        </div>
+        <!-- <p class="copyright mb-0 "><strong>E-Skripsi | Unirow Tuban </strong><br>Versi 1.0</p> -->
       </div>
     </div>
     <!--**********************************

@@ -13,18 +13,18 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-9">
 							<div>
 								<h2 class="text-black mb-1">Selamat Datang Kelvin</h2>
 								<h5 class="card-title mb-1"><small class="mb-0">Anda Login Sebagai Admin</small></h5>
 								<h4 class="card-title mb-1"><small class="mb-0">Di Sistem E-Skripsi Universitas PGRI Ronggolawe Tuban</small></h4>
 							</div>
-							<button type="button" class="btn btn-primary btn-sm mt-2"><span class="left text-white"><i class="lab la-youtube"></i>
+							<button type="button" class="btn btn-outline-light btn-sm mt-2"><span class="left"><i class="la la-play"></i>
 								</span>PANDUAN</button>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3 hide-on-desktop">
 							<div class="card-action card-tabs mt-3 mt-sm-0">
-								<img src="/images/logo.png" class="rounded mx-auto d-block" alt="image">
+								<img src="/images/logo.png" class="img-fluid mx-auto d-block" alt="image">
 							</div>
 						</div>
 					</div>
