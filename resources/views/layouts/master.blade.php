@@ -174,7 +174,7 @@
               <li class="nav-item dropdown header-profile">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                   <div class="header-info">
-                    <span>Hello, <strong>Kelvin</strong></span>
+                    <span>Hello, <strong>{{$user['nama']}}</strong></span>
                   </div>
                   <img src="/images/profile/pic1.jpg" width="20" alt="" />
                 </a>

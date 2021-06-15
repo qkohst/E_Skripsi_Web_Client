@@ -15,8 +15,9 @@
 					<div class="row">
 						<div class="col-md-9">
 							<div>
-								<h2 class="text-black mb-1">Selamat Datang Kelvin</h2>
-								<h5 class="card-title mb-1"><small class="mb-0">Anda Login Sebagai Admin</small></h5>
+								<h2 class="text-black mb-1">Selamat Datang</h2>
+								<h1 class="text-black mb-1">{{$user['nama']}}</h1>
+								<h5 class="card-title mb-1"><small class="mb-0">Anda Login Sebagai {{$user['role']}}</small></h5>
 								<h4 class="card-title mb-1"><small class="mb-0">Di Sistem E-Skripsi Universitas PGRI Ronggolawe Tuban</small></h4>
 							</div>
 							<button type="button" class="btn btn-outline-light btn-sm mt-2"><span class="left"><i class="la la-play"></i>
