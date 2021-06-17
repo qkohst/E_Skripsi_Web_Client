@@ -22,7 +22,7 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
         if ($validator->fails()) {
-            return back();
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
         $response = Http::post('http://127.0.0.1:8000/api/v1/auth/login', [
             'api_key' => 'VaKpEbkhOzZitGfIr1RxtGJkCwW43g7fiAnXhDkmyjUY5ezVFm4XdcbPwDBZ',
@@ -30,13 +30,16 @@ class AuthController extends Controller
             'password' => $request->password,
         ]);
 
+        // dd($response->json());
         if ($response->status() == 200) {
             $body = $response->json();
             $user = $body['user'];
-            return view('dashboard.index', compact('user'));
-        } elseif ($response->status() == 422) {
+            return view('dashboard.index', compact('user'))->with('success', 'Task Created Successfully!');
+        } elseif ($response->status() == 400) {
             return back();
         } elseif ($response->status() == 401) {
+            return back();
+        } elseif ($response->status() == 422) {
             return back();
         }
     }
