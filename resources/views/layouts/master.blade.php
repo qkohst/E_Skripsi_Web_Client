@@ -174,7 +174,7 @@
               <li class="nav-item dropdown header-profile">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                   <div class="header-info">
-                    <span>Hello, <strong>{{$user['nama']}}</strong></span>
+                    <span><strong>{{Session::get('nama_user')}}</strong></span>
                   </div>
                   <img src="/images/profile/pic1.jpg" width="20" alt="" />
                 </a>
@@ -186,13 +186,25 @@
                     </svg>
                     <span class="ml-2">Profile </span>
                   </a>
-                  <a href="./page-login.html" class="dropdown-item ai-icon">
+                  <a href="{{ route('logout') }}" class="dropdown-item ai-icon" onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
                     <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                       <polyline points="16 17 21 12 16 7"></polyline>
                       <line x1="21" y1="12" x2="9" y2="12"></line>
                     </svg>
                     <span class="ml-2">Logout </span>
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
+                  <!-- <a href="./page-login.html" class="dropdown-item ai-icon">
+                    <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                      <polyline points="16 17 21 12 16 7"></polyline>
+                      <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="ml-2">Logout </span> -->
                   </a>
                 </div>
               </li>
@@ -209,40 +221,15 @@
             Sidebar start
         ***********************************-->
     <div class="deznav">
-      <div class="deznav-scroll">
-        <ul class="metismenu" id="menu">
-          <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-              <i class="flaticon-381-home-3"></i>
-              <span class="nav-text">Dashboard</span>
-            </a>
-          </li>
-          <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-              <i class="flaticon-381-folder-8"></i>
-              <span class="nav-text">Data Master</span>
-            </a>
-            <ul aria-expanded="false">
-              <li><a href="./form-element.html">Fakultas</a></li>
-              <li><a href="./form-wizard.html">Program Studi</a></li>
-              <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Jabatan Dosen</a>
-                <ul aria-expanded="false">
-                  <li><a href="./email-compose.html">Jabatan Struktural</a></li>
-                  <li><a href="./email-inbox.html">Jabatan Fungsional</a></li>
-                </ul>
-              </li>
-              <li><a href="form-pickers.html">Admin Prodi</a></li>
-            </ul>
-          </li>
-          <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-              <i class="flaticon-381-book"></i>
-              <span class="nav-text">Skripsi</span>
-            </a>
-          </li>
-        </ul>
-        <div class="copyright fixed-bottom hide-on-desktop mb-0 ">
-          <p><strong>E-Skripsi | Unirow Tuban </strong><br>Versi 1.0</p>
-        </div>
-        <!-- <p class="copyright mb-0 "><strong>E-Skripsi | Unirow Tuban </strong><br>Versi 1.0</p> -->
-      </div>
+      @if(Session::get('role_user') == 'Admin')
+      @include('layouts.sidebaradmin')
+      @elseif(Session::get('role_user') == 'Admin Prodi')
+      @include('layouts.sidebaradminprodi')
+      @elseif(Session::get('role_user') == 'Mahasiswa')
+      @include('layouts.sidebarmahasiswa')
+      @elseif(Session::get('role_user') == 'Dosen')
+      @include('layouts.sidebardosen')
+      @endif
     </div>
     <!--**********************************
             Sidebar end
@@ -270,7 +257,6 @@
     ***********************************-->
   <!-- Required vendors -->
   <script src="/vendor/global/global.min.js"></script>
-  <script src="/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
   <script src="/vendor/chart.js/Chart.bundle.min.js"></script>
   <script src="/js/custom.min.js"></script>
   <script src="/js/deznav-init.js"></script>

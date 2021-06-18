@@ -38,12 +38,21 @@
                 </tr>
               </thead>
               <tbody>
+                <?php $no = 0; ?>
+                @foreach($data_fakultas as $fakultas)
+                <?php $no++; ?>
                 <tr>
-                  <td>1</td>
-                  <td>14</td>
-                  <td>Teknik</td>
-                  <td>FT</td>
-                  <td><span class="badge light badge-success">Aktif</span></td>
+                  <td>{{$no}}</td>
+                  <td>{{ $fakultas['kode_fakultas']}}</td>
+                  <td>{{ $fakultas['nama_fakultas']}}</td>
+                  <td>{{ $fakultas['singkatan_fakultas']}}</td>
+                  <td>
+                    @if($fakultas['status_fakultas'] == 'Aktif')
+                    <span class="badge light badge-success">{{$fakultas['status_fakultas']}}</span>
+                    @else
+                    <span class="badge light badge-danger">{{$fakultas['status_fakultas']}}</span>
+                    @endif
+                  </td>
                   <td>
                     <div class="d-flex">
                       <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
@@ -51,19 +60,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>15</td>
-                  <td>Pendidikan</td>
-                  <td>FP</td>
-                  <td><span class="badge light badge-danger">Non Aktif</span></td>
-                  <td>
-                    <div class="d-flex">
-                      <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                      <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                    </div>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

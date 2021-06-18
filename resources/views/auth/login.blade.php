@@ -23,15 +23,15 @@
                 <div class="auth-form">
                   <h3 class="text-center mb-2">LOGIN</h3>
                   <h4 class="text-center mb-4">E-Skripsi Unirow Tuban</h4>
-                  <form action="/dashboard" method="POST">
-                    {!! csrf_field() !!}
+                  <form action="{{route('login')}}" method="POST">
+                    @csrf
                     <div class="form-group">
                       <label class="mb-1"><strong>Username</strong></label>
-                      <input type="text" class="form-control" name="username" placeholder="NPM atau NIDN">
+                      <input type="text" class="form-control" name="username" placeholder="NPM atau NIDN" value="{{ old('username') }}" required>
                     </div>
                     <div class="form-group">
                       <label class="mb-1"><strong>Password</strong></label>
-                      <input type="password" class="form-control" name="password" placeholder="password">
+                      <input type="password" class="form-control" name="password" placeholder="password" required>
                     </div>
                     <div class="form-row d-flex justify-content-between mt-4 mb-2">
                       <div class="form-group">

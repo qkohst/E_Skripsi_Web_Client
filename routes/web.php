@@ -23,5 +23,32 @@ use Illuminate\Support\Facades\Route;
 //     return view('admin/fakultas/edit');
 // });
 
-Route::get('/', 'AuthController@form_login')->name('login');
-Route::post('/dashboard', 'AuthController@post_login');
+Route::get('/', 'AuthController@index')->name('login');
+Route::post('/login', 'AuthController@login')->name('login');
+
+Route::group(['middleware' => 'CekLoginMiddleware'], function () {
+  Route::post('/logout', 'AuthController@logout')->name('logout');
+  Route::get('/dashboard', function () {
+    return view('dashboard/index');
+  });
+
+  // Route Admin 
+  Route::group(['middleware' => 'CekRoleMiddleware:Admin'], function () {
+    Route::resource('fakultas', 'Admin\FakultasController');
+  });
+
+  // Route Admin Prodi
+  Route::group(['middleware' => 'CekRoleMiddleware:Admin Prodi'], function () {
+    //
+  });
+
+  // Route Mahasiswa
+  Route::group(['middleware' => 'CekRoleMiddleware:Mahasiswa'], function () {
+    //
+  });
+
+  // Route Dosen
+  Route::group(['middleware' => 'CekRoleMiddleware:Dosen'], function () {
+    //
+  });
+});
