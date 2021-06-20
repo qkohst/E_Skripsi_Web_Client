@@ -26,13 +26,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|numeric|min:10',
-            'password' => 'required|min:6',
-        ]);
-        if ($validator->fails()) {
-            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
-        }
         $response = Http::post($this->_url . 'auth/login', [
             'api_key' => $this->_api_key,
             'username' => $request->username,
@@ -42,11 +35,11 @@ class AuthController extends Controller
         if ($response->status() == 200) {
             session([
                 'status_login' => true,
-                'id_user' => $response->json()['user']['id'],
-                'nama_user' => $response->json()['user']['nama'],
-                'username_user' => $response->json()['user']['username'],
-                'role_user' => $response->json()['user']['role'],
-                'api_token_user' => $response->json()['user']['api_token'],
+                'id_user' => $response->json()['data']['id'],
+                'nama_user' => $response->json()['data']['nama'],
+                'username_user' => $response->json()['data']['username'],
+                'role_user' => $response->json()['data']['role'],
+                'api_token_user' => $response->json()['data']['api_token'],
             ]);
             return redirect('/dashboard')->with('success', $response->json()['message']);
         }
@@ -58,6 +51,23 @@ class AuthController extends Controller
         $response = Http::post($this->_url . 'auth/logout', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
+        ]);
+        if ($response->status() == 200) {
+            $request->session()->flush();
+            return redirect('/')->with('success', $response->json()['message']);
+        }
+        return back()->with('toast_error', $response->json()['message']);
+    }
+
+    public function ganti_password(Request $request)
+    {
+        $response = Http::post($this->_url . 'auth/gantipassword', [
+            'api_key' => $this->_api_key,
+            'api_token' => session('api_token_user'),
+            'username' => $request->username,
+            'password_lama' => $request->password_lama,
+            'password_baru' => $request->password_baru,
+            'confirm_password' => $request->confirm_password,
         ]);
         if ($response->status() == 200) {
             $request->session()->flush();

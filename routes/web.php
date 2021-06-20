@@ -28,13 +28,21 @@ Route::post('/login', 'AuthController@login')->name('login');
 
 Route::group(['middleware' => 'CekLoginMiddleware'], function () {
   Route::post('/logout', 'AuthController@logout')->name('logout');
-  Route::get('/dashboard', function () {
-    return view('dashboard/index');
-  });
+  Route::post('/gantipassword', 'AuthController@ganti_password')->name('ganti_password');
+  Route::get('/dashboard', 'DashboardController@index');
+
 
   // Route Admin 
   Route::group(['middleware' => 'CekRoleMiddleware:Admin'], function () {
-    Route::resource('fakultas', 'Admin\FakultasController');
+    Route::resource('profile', 'Admin\ProfileController', [
+      'only' => ['index', 'update', 'store']
+    ]);
+    Route::resource('fakultas', 'Admin\FakultasController', [
+      'except' => ['create', 'show']
+    ]);
+    Route::resource('prodi', 'Admin\ProdiController', [
+      'except' => ['create', 'show']
+    ]);
   });
 
   // Route Admin Prodi

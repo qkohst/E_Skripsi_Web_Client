@@ -11,7 +11,7 @@
       </a>
       <ul aria-expanded="false">
         <li><a href="{{ route('fakultas.index') }}">Fakultas</a></li>
-        <li><a href="./form-wizard.html">Program Studi</a></li>
+        <li><a href="{{ route('prodi.index') }}">Program Studi</a></li>
         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Jabatan Dosen</a>
           <ul aria-expanded="false">
             <li><a href="./email-compose.html">Jabatan Struktural</a></li>

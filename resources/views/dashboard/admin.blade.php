@@ -1,5 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.masteradmin')
 
+@section('title')
+<title>E-Skripsi | Admin Dashboard</title>
+@endsection
 @section('content')
 <div class="container-fluid">
 	<div class="form-head d-flex mb-3 align-items-start">

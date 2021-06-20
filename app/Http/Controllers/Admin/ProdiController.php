@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class FakultasController extends Controller
+
+class ProdiController extends Controller
 {
     public function __construct()
     {
@@ -21,16 +22,31 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        $response = Http::get($this->_url . 'fakultas', [
+        $response_prodi = Http::get($this->_url . 'programstudi', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
-        if ($response->status() == 200) {
-            $data_fakultas = $response->json()['data'];
+        $response_fakultas = Http::get($this->_url . 'fakultas/aktif', [
+            'api_key' => $this->_api_key,
+            'api_token' => session('api_token_user'),
+        ]);
+        if ($response_prodi->status() == 200) {
+            $data_prodi = $response_prodi->json()['data'];
+            $data_fakultas = $response_fakultas->json()['data'];
 
-            return view('admin.fakultas.index', compact('data_fakultas'));
+            return view('admin.prodi.index', compact('data_prodi', 'data_fakultas'));
         }
-        return back()->with('toast_error', $response->json()['message']);
+        return back()->with('toast_error', $response_prodi->json()['message']);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -41,19 +57,32 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::post($this->_url . 'fakultas', [
+        $response = Http::post($this->_url . 'programstudi', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
-            'kode_fakultas' => $request->kode_fakultas,
-            'nama_fakultas' => $request->nama_fakultas,
-            'singkatan_fakultas' => $request->singkatan_fakultas,
+            'fakultas_id_fakultas' => $request->kode_fakultas,
+            'kode_program_studi' => $request->kode_program_studi,
+            'nama_program_studi' => $request->nama_program_studi,
+            'singkatan_program_studi' => $request->singkatan_program_studi,
         ]);
+
         if ($response->status() == 201) {
             return back()->with('success', $response->json()['message']);
         }
+        // dd($response->json());
         return back()->with('toast_error', $response->json()['message']);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -63,13 +92,13 @@ class FakultasController extends Controller
      */
     public function edit($id)
     {
-        $response = Http::get($this->_url . 'fakultas/' . $id, [
+        $response = Http::get($this->_url . 'programstudi/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
         if ($response->status() == 200) {
-            $data_fakultas = $response->json()['data'];
-            return view('admin.fakultas.edit', compact('data_fakultas'));
+            $data_prodi = $response->json()['data'];
+            return view('admin.prodi.edit', compact('data_prodi'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -83,16 +112,16 @@ class FakultasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Http::post($this->_url . 'fakultas/' . $id, [
+        $response = Http::post($this->_url . 'programstudi/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'PATCH',
-            'nama_fakultas' => $request->nama_fakultas,
-            'singkatan_fakultas' => $request->singkatan_fakultas,
-            'status_fakultas' => $request->status_fakultas,
+            'nama_program_studi' => $request->nama_program_studi,
+            'singkatan_program_studi' => $request->singkatan_program_studi,
+            'status_program_studi' => $request->status_program_studi,
         ]);
         if ($response->status() == 200) {
-            return redirect('/fakultas')->with('success', $response->json()['message']);
+            return redirect('/prodi')->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -105,7 +134,7 @@ class FakultasController extends Controller
      */
     public function destroy($id)
     {
-        $response = Http::post($this->_url . 'fakultas/' . $id, [
+        $response = Http::post($this->_url . 'programstudi/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'DELETE',
