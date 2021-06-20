@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 
-class ProdiController extends Controller
+class JabatanStrukturalController extends Controller
 {
     public function __construct()
     {
@@ -22,32 +22,18 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        $response_prodi = Http::get($this->_url . 'programstudi', [
+        $response = Http::get($this->_url . 'jabatanstruktural', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
-        $response_fakultas = Http::get($this->_url . 'fakultas/aktif', [
-            'api_key' => $this->_api_key,
-            'api_token' => session('api_token_user'),
-        ]);
-        if ($response_prodi->status() == 200) {
-            $data_prodi = $response_prodi->json()['data'];
-            $data_fakultas = $response_fakultas->json()['data'];
 
-            return view('admin.prodi.index', compact('data_prodi', 'data_fakultas'));
+        if ($response->status() == 200) {
+            $data_jabatanstruktural = $response->json()['data'];
+            return view('admin.jabatanstruktural.index', compact('data_jabatanstruktural'));
         }
         return back()->with('toast_error', $response_prodi->json()['message']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -57,13 +43,11 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::post($this->_url . 'programstudi', [
+        $response = Http::post($this->_url . 'jabatanstruktural', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
-            'fakultas_id_fakultas' => $request->kode_fakultas,
-            'kode_program_studi' => $request->kode_program_studi,
-            'nama_program_studi' => $request->nama_program_studi,
-            'singkatan_program_studi' => $request->singkatan_program_studi,
+            'nama_jabatan_struktural' => $request->nama_jabatan_struktural,
+            'deskripsi_jabatan_struktural' => $request->deskripsi_jabatan_struktural,
         ]);
 
         if ($response->status() == 201) {
@@ -71,6 +55,7 @@ class ProdiController extends Controller
         }
         return back()->with('toast_error', $response->json()['message']);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -80,13 +65,13 @@ class ProdiController extends Controller
      */
     public function edit($id)
     {
-        $response = Http::get($this->_url . 'programstudi/' . $id, [
+        $response = Http::get($this->_url . 'jabatanstruktural/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
         if ($response->status() == 200) {
-            $data_prodi = $response->json()['data'];
-            return view('admin.prodi.edit', compact('data_prodi'));
+            $data_jabatanstruktural = $response->json()['data'];
+            return view('admin.jabatanstruktural.edit', compact('data_jabatanstruktural'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -100,16 +85,14 @@ class ProdiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Http::post($this->_url . 'programstudi/' . $id, [
+        $response = Http::post($this->_url . 'jabatanstruktural/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'PATCH',
-            'nama_program_studi' => $request->nama_program_studi,
-            'singkatan_program_studi' => $request->singkatan_program_studi,
-            'status_program_studi' => $request->status_program_studi,
+            'deskripsi_jabatan_struktural' => $request->deskripsi_jabatan_struktural,
         ]);
         if ($response->status() == 200) {
-            return redirect('/prodi')->with('success', $response->json()['message']);
+            return redirect('/jabatanstruktural')->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -122,7 +105,7 @@ class ProdiController extends Controller
      */
     public function destroy($id)
     {
-        $response = Http::post($this->_url . 'programstudi/' . $id, [
+        $response = Http::post($this->_url . 'jabatanstruktural/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'DELETE',

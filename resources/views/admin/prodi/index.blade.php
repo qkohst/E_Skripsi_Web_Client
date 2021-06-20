@@ -1,6 +1,6 @@
 @extends('layouts.masteradmin')
 @section('title')
-<title>E-Skripsi | Prodi</title>
+<title>E-Skripsi | Program Studi</title>
 @endsection
 
 @section('content')

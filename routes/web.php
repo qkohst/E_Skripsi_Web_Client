@@ -43,6 +43,9 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
     Route::resource('prodi', 'Admin\ProdiController', [
       'except' => ['create', 'show']
     ]);
+    Route::resource('jabatanstruktural', 'Admin\JabatanStrukturalController', [
+      'except' => ['create', 'show']
+    ]);
   });
 
   // Route Admin Prodi
