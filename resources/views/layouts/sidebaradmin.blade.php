@@ -15,13 +15,13 @@
         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Jabatan Dosen</a>
           <ul aria-expanded="false">
             <li><a href="{{ route('jabatanstruktural.index') }}">Jabatan Struktural</a></li>
-            <li><a href="./email-inbox.html">Jabatan Fungsional</a></li>
+            <li><a href="{{ route('jabatanfungsional.index') }}">Jabatan Fungsional</a></li>
           </ul>
         </li>
-        <li><a href="form-pickers.html">Admin Prodi</a></li>
+        <li><a href="{{ route('adminprodi.index') }}">Admin Prodi</a></li>
       </ul>
     </li>
-    <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+    <li><a href="{{ route('skripsi.index') }}" class="ai-icon" aria-expanded="false">
         <i class="flaticon-381-book"></i>
         <span class="nav-text">Skripsi</span>
       </a>

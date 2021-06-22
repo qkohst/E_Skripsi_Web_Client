@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 
-class JabatanStrukturalController extends Controller
+class AdminProdiController extends Controller
 {
     public function __construct()
     {
@@ -22,18 +22,17 @@ class JabatanStrukturalController extends Controller
      */
     public function index()
     {
-        $response = Http::get($this->_url . 'jabatanstruktural', [
+        $response = Http::get($this->_url . 'adminprodi', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
 
         if ($response->status() == 200) {
-            $data_jabatanstruktural = $response->json()['data'];
-            return view('admin.jabatanstruktural.index', compact('data_jabatanstruktural'));
+            $data_adminprodi = $response->json()['data'];
+            return view('admin.adminprodi.index', compact('data_adminprodi'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -43,38 +42,28 @@ class JabatanStrukturalController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::post($this->_url . 'jabatanstruktural', [
-            'api_key' => $this->_api_key,
-            'api_token' => session('api_token_user'),
-            'nama_jabatan_struktural' => $request->nama_jabatan_struktural,
-            'deskripsi_jabatan_struktural' => $request->deskripsi_jabatan_struktural,
-        ]);
-
-        if ($response->status() == 201) {
-            return back()->with('success', $response->json()['message']);
-        }
-        return back()->with('toast_error', $response->json()['message']);
+        //
     }
 
-
     /**
-     * Show the form for editing the specified resource.
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function show($id)
     {
-        $response = Http::get($this->_url . 'jabatanstruktural/' . $id, [
+        $response = Http::get($this->_url . 'adminprodi/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
         if ($response->status() == 200) {
-            $data_jabatanstruktural = $response->json()['data'];
-            return view('admin.jabatanstruktural.edit', compact('data_jabatanstruktural'));
+            $data_adminprodi = $response->json()['data'];
+            return view('admin.adminprodi.show', compact('data_adminprodi'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -85,14 +74,16 @@ class JabatanStrukturalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Http::post($this->_url . 'jabatanstruktural/' . $id, [
+        $response = Http::post($this->_url . 'adminprodi/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'PATCH',
-            'deskripsi_jabatan_struktural' => $request->deskripsi_jabatan_struktural,
+            'nama_admin_prodi' => $request->nama_admin_prodi,
+            'nip_admin_prodi' => $request->nip_admin_prodi,
+            'nik_admin_prodi' => $request->nik_admin_prodi,
         ]);
         if ($response->status() == 200) {
-            return redirect('/jabatanstruktural')->with('success', $response->json()['message']);
+            return back()->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -105,12 +96,26 @@ class JabatanStrukturalController extends Controller
      */
     public function destroy($id)
     {
-        $response = Http::post($this->_url . 'jabatanstruktural/' . $id, [
+        $response = Http::post($this->_url . 'adminprodi/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'DELETE',
         ]);
         if ($response->status() == 200) {
+            return back()->with('success', $response->json()['message']);
+        }
+        return back()->with('toast_error', $response->json()['message']);
+    }
+
+    public function riset_password(Request $request, $id)
+    {
+        $response = Http::post($this->_url . 'adminprodi/' . $id . '/resetpassword', [
+            'api_key' => $this->_api_key,
+            'api_token' => session('api_token_user'),
+            '_method'   => 'PATCH',
+            'nidn_admin_prodi' => $request->nidn_admin_prodi,
+        ]);
+        if ($response->status() == 205) {
             return back()->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);

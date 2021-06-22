@@ -1,7 +1,7 @@
 @extends('layouts.masteradminprodi')
 
 @section('title')
-<title>E-Skripsi | AdPro Dashboard</title>
+<title>E-Skripsi | Admin Prodi Dashboard</title>
 @endsection
 @section('content')
 <div class="container-fluid">

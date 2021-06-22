@@ -21,7 +21,7 @@
         <div class="col-xl-12 col-lg-6 ">
           <div class="card h-auto">
             <div class="card-body text-center">
-              <img src="http://127.0.0.1:8000/api/v1/{{Session::get('avatar_user')}}" width="150" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
+              <img src="http://127.0.0.1:8000/api/v1/{{Session::get('avatar_user')}}" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
               <h4 class="mb-3 text-black font-w600">{{$profile['nama_admin']}}</h4>
 
               <table class="table">
@@ -150,8 +150,9 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label>Foto</label>
-                            <div class="input-group">
-                              <input type="file" name="foto_admin" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="foto_admin" id="customFile" accept="image/*">
+                              <label class="custom-file-label" for="customFile">{{$profile['foto_admin']['nama_file']}}</label>
                             </div>
                           </div>
                         </div>
@@ -190,7 +191,7 @@
                               </label>
                             </div>
                           </div>
-                          <button type="submit" class="btn btn-sm btn-primary">Ganti Password</button>
+                          <button type="submit" class="btn btn-sm btn-primary btn-block">GANTI PASSWORD</button>
                         </form>
                       </div>
                     </div>

@@ -46,6 +46,18 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
     Route::resource('jabatanstruktural', 'Admin\JabatanStrukturalController', [
       'except' => ['create', 'show']
     ]);
+    Route::resource('jabatanfungsional', 'Admin\JabatanFungsionalController', [
+      'except' => ['create', 'show']
+    ]);
+    Route::resource('adminprodi', 'Admin\AdminProdiController', [
+      'except' => ['create', 'edit']
+    ]);
+    Route::post('adminprodi/{id}/riset_password', 'Admin\AdminProdiController@riset_password');
+    Route::resource('skripsi', 'Admin\SkripsiController', [
+      'only' => ['index']
+    ]);
+    Route::get('/skripsi/{id}/detailseminar', 'Admin\SkripsiController@detail_seminar')->name('detail_seminar');
+    Route::get('/skripsi/{id}/detailsidang', 'Admin\SkripsiController@detail_sidang')->name('detail_sidang');
   });
 
   // Route Admin Prodi

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\UploadedFile;
 
 
 class ProfileController extends Controller
@@ -33,7 +34,7 @@ class ProfileController extends Controller
         return back()->with('toast_error', $response->json()['message']);
     }
 
-   
+
     /**
      * Store a newly created resource in storage.
      *
@@ -42,8 +43,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->foto_admin);
-        $response = Http::post($this->_url, [
+        $response = Http::asForm()->post($this->_url, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             'nama_admin' => $request->nama_admin,
@@ -55,12 +55,12 @@ class ProfileController extends Controller
             'jenis_kelamin_admin' => $request->jenis_kelamin_admin,
             'email_admin' => $request->email_admin,
             'no_hp_admin' => $request->no_hp_admin,
-            'foto_admin' => $request->foto_admin,
+            'foto_admin' => $request->file('foto_admin'),
         ]);
-        if ($response->status() == 200) {
-            return back()->with('success', $response->json()['message']);
-        }
-        return back()->with('toast_error', $response->json()['message']);
+        dd($response->json());
+        // if ($response->status() == 200) {
+        //     return back()->with('success', $response->json()['message']);
+        // }
+        // return back()->with('toast_error', $response->json()['message']);
     }
-
 }

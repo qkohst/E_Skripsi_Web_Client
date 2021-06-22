@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-
-class JabatanStrukturalController extends Controller
+class JabatanFungsionalController extends Controller
 {
     public function __construct()
     {
@@ -22,18 +21,17 @@ class JabatanStrukturalController extends Controller
      */
     public function index()
     {
-        $response = Http::get($this->_url . 'jabatanstruktural', [
+        $response = Http::get($this->_url . 'jabatanfungsional', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
 
         if ($response->status() == 200) {
-            $data_jabatanstruktural = $response->json()['data'];
-            return view('admin.jabatanstruktural.index', compact('data_jabatanstruktural'));
+            $data_jabatanfungsional = $response->json()['data'];
+            return view('admin.jabatanfungsional.index', compact('data_jabatanfungsional'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -43,11 +41,11 @@ class JabatanStrukturalController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::post($this->_url . 'jabatanstruktural', [
+        $response = Http::post($this->_url . 'jabatanfungsional', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
-            'nama_jabatan_struktural' => $request->nama_jabatan_struktural,
-            'deskripsi_jabatan_struktural' => $request->deskripsi_jabatan_struktural,
+            'nama_jabatan_fungsional' => $request->nama_jabatan_fungsional,
+            'deskripsi_jabatan_fungsional' => $request->deskripsi_jabatan_fungsional,
         ]);
 
         if ($response->status() == 201) {
@@ -65,13 +63,13 @@ class JabatanStrukturalController extends Controller
      */
     public function edit($id)
     {
-        $response = Http::get($this->_url . 'jabatanstruktural/' . $id, [
+        $response = Http::get($this->_url . 'jabatanfungsional/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
         if ($response->status() == 200) {
-            $data_jabatanstruktural = $response->json()['data'];
-            return view('admin.jabatanstruktural.edit', compact('data_jabatanstruktural'));
+            $data_jabatanfungsional = $response->json()['data'];
+            return view('admin.jabatanfungsional.edit', compact('data_jabatanfungsional'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -85,14 +83,14 @@ class JabatanStrukturalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Http::post($this->_url . 'jabatanstruktural/' . $id, [
+        $response = Http::post($this->_url . 'jabatanfungsional/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'PATCH',
-            'deskripsi_jabatan_struktural' => $request->deskripsi_jabatan_struktural,
+            'deskripsi_jabatan_fungsional' => $request->deskripsi_jabatan_fungsional,
         ]);
         if ($response->status() == 200) {
-            return redirect('/jabatanstruktural')->with('success', $response->json()['message']);
+            return redirect('/jabatanfungsional')->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -105,7 +103,7 @@ class JabatanStrukturalController extends Controller
      */
     public function destroy($id)
     {
-        $response = Http::post($this->_url . 'jabatanstruktural/' . $id, [
+        $response = Http::post($this->_url . 'jabatanfungsional/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'DELETE',
