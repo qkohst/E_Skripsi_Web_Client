@@ -5,12 +5,12 @@
         <span class="nav-text">Dashboard</span>
       </a>
     </li>
-    <li><a href="#" class="ai-icon" aria-expanded="false">
+    <li><a href="{{ route('mahasiswa.index') }}" class="ai-icon" aria-expanded="false">
         <i class="flaticon-381-user-9"></i>
         <span class="nav-text">Mahasiswa</span>
       </a>
     </li>
-    <li><a href="#" class="ai-icon" aria-expanded="false">
+    <li><a href="{{ route('dosen.index') }}" class="ai-icon" aria-expanded="false">
         <i class="flaticon-381-user-8"></i>
         <span class="nav-text">Dosen</span>
       </a>
@@ -20,9 +20,9 @@
         <span class="nav-text">Skripsi</span>
       </a>
       <ul aria-expanded="false">
-        <li><a href="#">Persetujuan KRS</a></li>
-        <li><a href="#">Seminar Proposal</a></li>
-        <li><a href="#">Sidang Skripsi</a></li>
+        <li><a href="{{ route('persetujuankrs.index') }}">Persetujuan KRS</a></li>
+        <li><a href="{{ route('seminarproposal.index') }}">Seminar Proposal</a></li>
+        <li><a href="{{ route('sidangskripsi.index') }}">Sidang Skripsi</a></li>
       </ul>
     </li>
   </ul>

@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AdminProdi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-
 class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->_url = 'http://127.0.0.1:8000/api/v1/admin/profile';
+        $this->_url = 'http://127.0.0.1:8000/api/v1/adminprodi/profile';
         $this->_api_key = 'VaKpEbkhOzZitGfIr1RxtGJkCwW43g7fiAnXhDkmyjUY5ezVFm4XdcbPwDBZ';
     }
 
@@ -28,11 +27,10 @@ class ProfileController extends Controller
         ]);
         if ($response->status() == 200) {
             $profile = $response->json()['data'];
-            return view('admin.profile.index', compact('profile'));
+            return view('adminprodi.profile.index', compact('profile'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -45,16 +43,12 @@ class ProfileController extends Controller
         $response = Http::asForm()->post($this->_url, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
-            'nama_admin' => $request->nama_admin,
-            'nidn_admin' => $request->nidn_admin,
-            'nip_admin' => $request->nip_admin,
-            'nik_admin' => $request->nik_admin,
-            'tempat_lahir_admin' => $request->tempat_lahir_admin,
-            'tanggal_lahir_admin' => $request->tanggal_lahir_admin,
-            'jenis_kelamin_admin' => $request->jenis_kelamin_admin,
-            'email_admin' => $request->email_admin,
-            'no_hp_admin' => $request->no_hp_admin,
-            'foto_admin' => $request->file('foto_admin'),
+            'tempat_lahir_admin_prodi' => $request->tempat_lahir_admin_prodi,
+            'tanggal_lahir_admin_prodi' => $request->tanggal_lahir_admin_prodi,
+            'jenis_kelamin_admin_prodi' => $request->jenis_kelamin_admin_prodi,
+            'email_admin_prodi' => $request->email_admin_prodi,
+            'no_hp_admin_prodi' => $request->no_hp_admin_prodi,
+            'foto_admin_prodi' => $request->file('foto_admin_prodi'),
         ]);
         dd($response->json());
         // if ($response->status() == 200) {

@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AdminProdi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 
-class AdminProdiController extends Controller
+class MahasiswaController extends Controller
 {
     public function __construct()
     {
-        $this->_url = 'http://127.0.0.1:8000/api/v1/admin/';
+        $this->_url = 'http://127.0.0.1:8000/api/v1/adminprodi/';
         $this->_api_key = 'VaKpEbkhOzZitGfIr1RxtGJkCwW43g7fiAnXhDkmyjUY5ezVFm4XdcbPwDBZ';
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,17 +21,18 @@ class AdminProdiController extends Controller
      */
     public function index()
     {
-        $response = Http::get($this->_url . 'adminprodi', [
+        $response = Http::get($this->_url . 'mahasiswa', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
 
         if ($response->status() == 200) {
-            $data_adminprodi = $response->json()['data'];
-            return view('admin.adminprodi.index', compact('data_adminprodi'));
+            $data_mahasiswa = $response->json()['data'];
+            return view('adminprodi.mahasiswa.index', compact('data_mahasiswa'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -42,7 +42,20 @@ class AdminProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response = Http::post($this->_url . 'mahasiswa', [
+            'api_key' => $this->_api_key,
+            'api_token' => session('api_token_user'),
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'npm_mahasiswa' => $request->npm_mahasiswa,
+            'semester_mahasiswa' => $request->semester_mahasiswa,
+            'tempat_lahir_mahasiswa' => $request->tempat_lahir_mahasiswa,
+            'tanggal_lahir_mahasiswa' => $request->tanggal_lahir_mahasiswa,
+            'jenis_kelamin_mahasiswa' => $request->jenis_kelamin_mahasiswa,
+        ]);
+        if ($response->status() == 201) {
+            return back()->with('success', $response->json()['message']);
+        }
+        return back()->with('toast_error', $response->json()['message']);
     }
 
     /**
@@ -53,17 +66,16 @@ class AdminProdiController extends Controller
      */
     public function show($id)
     {
-        $response = Http::get($this->_url . 'adminprodi/' . $id, [
+        $response = Http::get($this->_url . 'mahasiswa/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
         ]);
         if ($response->status() == 200) {
-            $data_adminprodi = $response->json()['data'];
-            return view('admin.adminprodi.show', compact('data_adminprodi'));
+            $data_mahasiswa = $response->json()['data'];
+            return view('adminprodi.mahasiswa.show', compact('data_mahasiswa'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -74,16 +86,17 @@ class AdminProdiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Http::post($this->_url . 'adminprodi/' . $id, [
+        $response = Http::post($this->_url . 'mahasiswa/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'PATCH',
-            'nama_admin_prodi' => $request->nama_admin_prodi,
-            'nip_admin_prodi' => $request->nip_admin_prodi,
-            'nik_admin_prodi' => $request->nik_admin_prodi,
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'tempat_lahir_mahasiswa' => $request->tempat_lahir_mahasiswa,
+            'tanggal_lahir_mahasiswa' => $request->tanggal_lahir_mahasiswa,
+            'status_mahasiswa' => $request->status_mahasiswa,
         ]);
         if ($response->status() == 200) {
-            return back()->with('success', $response->json()['message']);
+            return redirect('/mahasiswa')->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }
@@ -96,7 +109,7 @@ class AdminProdiController extends Controller
      */
     public function destroy($id)
     {
-        $response = Http::post($this->_url . 'adminprodi/' . $id, [
+        $response = Http::post($this->_url . 'mahasiswa/' . $id, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'DELETE',
@@ -109,14 +122,14 @@ class AdminProdiController extends Controller
 
     public function riset_password(Request $request, $id)
     {
-        $response = Http::post($this->_url . 'adminprodi/' . $id . '/resetpassword', [
+        $response = Http::post($this->_url . 'mahasiswa/' . $id . '/resetpassword', [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             '_method'   => 'PATCH',
-            'nidn_admin_prodi' => $request->nidn_admin_prodi,
+            'npm_mahasiswa' => $request->npm_mahasiswa,
         ]);
         if ($response->status() == 205) {
-            return back('/adminprodi')->with('success', $response->json()['message']);
+            return redirect('/mahasiswa')->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }

@@ -27,6 +27,14 @@ class DashboardController extends Controller
             ]);
             return view('dashboard.admin');
         } elseif (session('role_user') == 'Admin Prodi') {
+            $response = Http::get($this->_url . 'adminprodi/profile', [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user'),
+            ]);
+            $avatar = $response->json()['data']['foto_admin_prodi'];
+            session([
+                'avatar_user' => $avatar['url']
+            ]);
             return view('dashboard.adminprodi');
         } elseif (session('role_user') == 'Mahasiswa') {
             return view('dashboard.mahasiswa');

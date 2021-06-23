@@ -35,24 +35,30 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
   // Route Admin 
   Route::group(['middleware' => 'CekRoleMiddleware:Admin'], function () {
     Route::resource('profile', 'Admin\ProfileController', [
-      'only' => ['index', 'update', 'store']
+      'only' => ['index', 'store']
     ]);
+
     Route::resource('fakultas', 'Admin\FakultasController', [
       'except' => ['create', 'show']
     ]);
+
     Route::resource('prodi', 'Admin\ProdiController', [
       'except' => ['create', 'show']
     ]);
+
     Route::resource('jabatanstruktural', 'Admin\JabatanStrukturalController', [
       'except' => ['create', 'show']
     ]);
+
     Route::resource('jabatanfungsional', 'Admin\JabatanFungsionalController', [
       'except' => ['create', 'show']
     ]);
+
     Route::resource('adminprodi', 'Admin\AdminProdiController', [
       'except' => ['create', 'edit']
     ]);
     Route::post('adminprodi/{id}/riset_password', 'Admin\AdminProdiController@riset_password');
+
     Route::resource('skripsi', 'Admin\SkripsiController', [
       'only' => ['index']
     ]);
@@ -62,7 +68,31 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
 
   // Route Admin Prodi
   Route::group(['middleware' => 'CekRoleMiddleware:Admin Prodi'], function () {
-    //
+    Route::resource('profile', 'AdminProdi\ProfileController', [
+      'only' => ['index', 'store']
+    ]);
+
+    Route::resource('mahasiswa', 'AdminProdi\MahasiswaController', [
+      'except' => ['create', 'edit']
+    ]);
+    Route::post('mahasiswa/{id}/riset_password', 'AdminProdi\MahasiswaController@riset_password');
+
+    Route::resource('dosen', 'AdminProdi\DosenController', [
+      'except' => ['create', 'edit']
+    ]);
+    Route::post('dosen/{id}/riset_password', 'AdminProdi\DosenController@riset_password');
+
+    Route::resource('persetujuankrs', 'AdminProdi\PersetujuanKRSController', [
+      'only' => ['index', 'update']
+    ]);
+
+    Route::resource('seminarproposal', 'AdminProdi\SeminarProposalController', [
+      'only' => ['index', 'show']
+    ]);
+
+    Route::resource('sidangskripsi', 'AdminProdi\SidangSkripsiController', [
+      'only' => ['index', 'show']
+    ]);
   });
 
   // Route Mahasiswa
