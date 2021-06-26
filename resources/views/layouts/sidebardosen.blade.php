@@ -10,10 +10,10 @@
         <span class="nav-text">Persetujuan</span>
       </a>
       <ul aria-expanded="false">
-        <li><a href="#">Judul & Pembimbing</a></li>
-        <li><a href="#">Penguji</a></li>
-        <li><a href="#">Seminar Proposal</a></li>
-        <li><a href="#">Sidang Skripsi</a></li>
+        <li><a href="{{ route('persetujuanjudul.index') }}">Judul & Pembimbing</a></li>
+        <li><a href="{{ route('persetujuanpenguji.index') }}">Penguji</a></li>
+        <li><a href="{{ route('persetujuanseminar.index') }}">Seminar Proposal</a></li>
+        <li><a href="{{ route('persetujuansidang.index') }}">Sidang Skripsi</a></li>
       </ul>
     </li>
     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -21,16 +21,16 @@
         <span class="nav-text">Bimbingan</span>
       </a>
       <ul aria-expanded="false">
-        <li><a href="#">Proposal Skripsi</a></li>
-        <li><a href="#">Skripsi</a></li>
+        <li><a href="{{ route('bimbinganproposal.index') }}">Proposal Skripsi</a></li>
+        <li><a href="{{ route('bimbinganskripsi.index') }}">Skripsi</a></li>
       </ul>
     </li>
-    <li><a href="#" class="ai-icon" aria-expanded="false">
+    <li><a href="{{ route('verifikasiseminar.index') }}" class="ai-icon" aria-expanded="false">
         <i class="flaticon-381-presentation"></i>
         <span class="nav-text">Seminar Proposal</span>
       </a>
     </li>
-    <li><a href="#" class="ai-icon" aria-expanded="false">
+    <li><a href="{{ route('verifikasisidang.index') }}" class="ai-icon" aria-expanded="false">
         <i class="flaticon-381-book"></i>
         <span class="nav-text">Sidang Skripsi</span>
       </a>

@@ -12,10 +12,12 @@
   <link href="/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
   <link href="/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/vendor/chartist/css/chartist.min.css">
-  <link href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
   <link href="/css/style.css" rel="stylesheet">
+  <!-- Summernote -->
+  <link href="/vendor/summernote/summernote.css" rel="stylesheet">
 
 </head>
 
@@ -44,7 +46,7 @@
             Nav header start
         ***********************************-->
     <div class="nav-header">
-      <a href="index.html" class="brand-logo">
+      <a href="/dashboard" class="brand-logo">
         <img class="logo-abbr" src="/images/logo.png" alt="">
         <img class="logo-compact" src="/images/logo-text.png" alt="">
         <img class="brand-title" src="/images/logo-text.png" alt="">
@@ -177,10 +179,10 @@
                   <div class="header-info">
                     <span><strong>{{Session::get('nama_user')}}</strong></span>
                   </div>
-                  <img src="/images/profile/pic1.jpg" width="20" alt="" />
+                  <img src="http://127.0.0.1:8000/api/v1/{{Session::get('avatar_user')}}" width="20" alt="" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <a href="./app-profile.html" class="dropdown-item ai-icon">
+                  <a href="{{ route('profiledosen.index') }}" class="dropdown-item ai-icon">
                     <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                       <circle cx="12" cy="7" r="4"></circle>
@@ -247,7 +249,6 @@
   <script src="/js/custom.min.js"></script>
   <script src="/js/deznav-init.js"></script>
 
-
   <!-- Counter Up -->
   <script src="/vendor/waypoints/jquery.waypoints.min.js"></script>
   <script src="/vendor/jquery.counterup/jquery.counterup.min.js"></script>
@@ -264,6 +265,10 @@
   <!-- Datatable -->
   <script src="/vendor/datatables/js/jquery.dataTables.min.js"></script>
   <script src="/js/plugins-init/datatables.init.js"></script>
+  <!-- Summernote -->
+  <script src="/vendor/summernote/js/summernote.min.js"></script>
+  <!-- Summernote init -->
+  <script src="/js/plugins-init/summernote-init.js"></script>
 
   @include('sweetalert::alert')
 

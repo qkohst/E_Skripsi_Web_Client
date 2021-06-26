@@ -105,7 +105,7 @@
                   </div>
                   <div class="tab-pane fade" id="editprofile">
                     <div class="basic-form pt-4">
-                      <form action="{{ route('profile.store') }}" enctype="multipart/form-data" method="POST">
+                      <form action="{{ route('profileadmin.store') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="form-row">
                           <div class="form-group col-md-6">

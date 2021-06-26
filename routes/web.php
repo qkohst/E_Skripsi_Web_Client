@@ -34,7 +34,7 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
 
   // Route Admin 
   Route::group(['middleware' => 'CekRoleMiddleware:Admin'], function () {
-    Route::resource('profile', 'Admin\ProfileController', [
+    Route::resource('profileadmin', 'Admin\ProfileController', [
       'only' => ['index', 'store']
     ]);
 
@@ -68,7 +68,7 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
 
   // Route Admin Prodi
   Route::group(['middleware' => 'CekRoleMiddleware:Admin Prodi'], function () {
-    Route::resource('profile', 'AdminProdi\ProfileController', [
+    Route::resource('profileadminprodi', 'AdminProdi\ProfileController', [
       'only' => ['index', 'store']
     ]);
 
@@ -97,11 +97,51 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
 
   // Route Mahasiswa
   Route::group(['middleware' => 'CekRoleMiddleware:Mahasiswa'], function () {
-    //
+    Route::resource('profilemahasiswa', 'Mahasiswa\ProfileController', [
+      'only' => ['index', 'store']
+    ]);
   });
 
   // Route Dosen
   Route::group(['middleware' => 'CekRoleMiddleware:Dosen'], function () {
-    //
+    Route::resource('profiledosen', 'Dosen\ProfileController', [
+      'only' => ['index', 'store']
+    ]);
+
+    Route::resource('persetujuanjudul', 'Dosen\PersetujuanJudulController', [
+      'only' => ['index', 'update']
+    ]);
+
+    Route::resource('persetujuanpenguji', 'Dosen\PersetujuanPengujiController', [
+      'only' => ['index', 'update']
+    ]);
+
+    Route::resource('persetujuanseminar', 'Dosen\PersetujuanSeminarController', [
+      'only' => ['index', 'update']
+    ]);
+
+    Route::resource('persetujuansidang', 'Dosen\PersetujuanSidangController', [
+      'only' => ['index', 'update']
+    ]);
+
+    Route::resource('bimbinganproposal', 'Dosen\BimbinganProposalController', [
+      'only' => ['index', 'update']
+    ]);
+
+    Route::resource('bimbinganskripsi', 'Dosen\BimbinganSkripsiController', [
+      'only' => ['index', 'update']
+    ]);
+
+    Route::resource('verifikasiseminar', 'Dosen\VerifikasiSeminarController', [
+      'only' => ['index', 'show', 'update']
+    ]);
+    Route::patch('verifikasiseminar/{id}/post_nilai', 'Dosen\VerifikasiSeminarController@post_nilai')
+      ->name('verifikasiseminar.post_nilai');
+
+    Route::resource('verifikasisidang', 'Dosen\VerifikasiSidangController', [
+      'only' => ['index', 'show', 'update']
+    ]);
+    Route::patch('verifikasisidang/{id}/post_nilai', 'Dosen\VerifikasiSidangController@post_nilai')
+      ->name('verifikasisidang.post_nilai');
   });
 });

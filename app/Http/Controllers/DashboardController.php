@@ -37,8 +37,24 @@ class DashboardController extends Controller
             ]);
             return view('dashboard.adminprodi');
         } elseif (session('role_user') == 'Mahasiswa') {
+            $response = Http::get($this->_url . 'mahasiswa/profile', [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user'),
+            ]);
+            $avatar = $response->json()['data']['foto_mahasiswa'];
+            session([
+                'avatar_user' => $avatar['url']
+            ]);
             return view('dashboard.mahasiswa');
         } elseif (session('role_user') == 'Dosen') {
+            $response = Http::get($this->_url . 'dosen/profile', [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user'),
+            ]);
+            $avatar = $response->json()['data']['foto_dosen'];
+            session([
+                'avatar_user' => $avatar['url']
+            ]);
             return view('dashboard.dosen');
         }
         return back()->with('toast_error', 'User role not found');
