@@ -31,7 +31,7 @@
                   <th>Nama Mahasiswa</th>
                   <th>Judul Skripsi</th>
                   <th>Tanggal Pengajuan</th>
-                  <th>Persetujuan Pembimbing</th>
+                  <th>Status Seminar</th>
                   <th>Penguji & Waktu Seminar</th>
                   <th>Aksi</th>
                 </tr>
@@ -46,7 +46,15 @@
                   <td>{{ $seminar['judul_skripsi']['nama_judul_skripsi']}}</td>
                   <td>{{ $seminar['tanggal_pengajuan_seminar_proposal']}}</td>
                   <td>
-                    <span class="badge light badge-success">{{ $seminar['persetujuan_pembimbing_seminar_proposal']}}</span>
+                    @if($seminar['status_seminar_proposal'] == 'Pengajuan')
+                    <span class="badge light badge-primary">{{$seminar['status_seminar_proposal']}}</span>
+                    @elseif ($seminar['status_seminar_proposal'] == 'Selesai')
+                    <span class="badge light badge-success">{{$seminar['status_seminar_proposal']}}</span>
+                    @elseif ($seminar['status_seminar_proposal'] == 'Sedang Berlangsung')
+                    <span class="badge light badge-info">{{$seminar['status_seminar_proposal']}}</span>
+                    @elseif ($seminar['status_seminar_proposal'] == 'Belum Mulai')
+                    <span class="badge light badge-warning">{{$seminar['status_seminar_proposal']}}</span>
+                    @endif
                   </td>
                   <td>
                     @if($seminar['penguji_dan_waktu_seminar_proposal'] == 'Belum Ditentukan')
@@ -73,7 +81,15 @@
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" target="_black" href="http://127.0.0.1:8000/api/v1/{{$seminar['file_seminar_proposal']['url']}}">Lihat File</a>
-                        <a class="dropdown-item" href="{{ route('seminarproposal.show', $seminar['id']) }}">Detail</a>
+                        @if($seminar['penguji_dan_waktu_seminar_proposal'] == 'Belum Ditentukan')
+                        <a class="dropdown-item" href="{{ route('seminarproposal.edit', $seminar['id']) }}">Tentukan Penguji</a>
+                        @elseif ($seminar['penguji_dan_waktu_seminar_proposal'] == 'Telah Ditentukan')
+                        <a class="dropdown-item" href="{{ route('seminarproposal.hasil_seminar', $seminar['id']) }}">Lihat Hasil Seminar</a>
+                        @elseif ($seminar['penguji_dan_waktu_seminar_proposal'] == 'Menunggu Persetujuan Penguji')
+                        <a class="dropdown-item" href="{{ route('seminarproposal.show', $seminar['id']) }}">Detail Persetujuan Penguji</a>
+                        @elseif ($seminar['penguji_dan_waktu_seminar_proposal'] == 'Ditolak Penguji')
+                        <a class="dropdown-item" href="{{ route('seminarproposal.edit', $seminar['id']) }}">Tentukan Ulang Penguji</a>
+                        @endif
                       </div>
                     </div>
                   </td>

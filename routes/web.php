@@ -87,11 +87,16 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
     ]);
 
     Route::resource('seminarproposal', 'AdminProdi\SeminarProposalController', [
-      'only' => ['index', 'show']
+      'only' => ['index', 'show', 'edit', 'update']
     ]);
+    Route::get('seminarproposal/{id}/hasil_seminar', 'AdminProdi\SeminarProposalController@hasil_seminar')
+      ->name('seminarproposal.hasil_seminar');
+    Route::post('seminarproposal/{id}/verifikasi_selesai', 'AdminProdi\SeminarProposalController@verifikasi_selesai')
+      ->name('seminarproposal.verifikasi_selesai');
+
 
     Route::resource('sidangskripsi', 'AdminProdi\SidangSkripsiController', [
-      'only' => ['index', 'show']
+      'only' => ['index', 'show', 'edit']
     ]);
   });
 
