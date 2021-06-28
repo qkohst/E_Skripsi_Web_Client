@@ -93,6 +93,8 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
       ->name('seminarproposal.hasil_seminar');
     Route::post('seminarproposal/{id}/verifikasi_selesai', 'AdminProdi\SeminarProposalController@verifikasi_selesai')
       ->name('seminarproposal.verifikasi_selesai');
+    Route::get('seminarproposal/{id}/cetak_nilai', 'AdminProdi\SeminarProposalController@cetak_nilai')
+      ->name('seminarproposal.cetak_nilai');
 
 
     Route::resource('sidangskripsi', 'AdminProdi\SidangSkripsiController', [

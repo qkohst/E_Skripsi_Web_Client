@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminProdi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use PDF;
 
 
 class SeminarProposalController extends Controller
@@ -143,6 +144,19 @@ class SeminarProposalController extends Controller
         ]);
         if ($response->status() == 200) {
             return redirect('/seminarproposal')->with('success', $response->json()['message']);
+        }
+        return back()->with('toast_error', $response->json()['message']);
+    }
+    public function cetak_nilai($id)
+    {
+        $response = Http::get($this->_url . 'seminarproposal/' . $id . '/daftarnilai', [
+            'api_key' => $this->_api_key,
+            'api_token' => session('api_token_user'),
+        ]);
+        if ($response->status() == 200) {
+            $data_nilai = $response->json()['data'];
+            $pdf = PDF::loadview('adminprodi.seminarproposal.cetaknilaiseminar', compact('data_nilai'))->setPaper('Folio', 'potrait');
+            return $pdf->stream();
         }
         return back()->with('toast_error', $response->json()['message']);
     }

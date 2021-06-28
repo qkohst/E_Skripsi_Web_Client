@@ -122,18 +122,15 @@
                     </table>
                   </div>
                   <div class="row">
-                    <div class="row">
-                      <form id="verifikasi-form" action="{{ route('seminarproposal.verifikasi_selesai', $data_seminar['id']) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Verifikasi Seminar Proposal ?')"> Verifikasi Seminar Proposal Selesai
-                        </button>
-                      </form>
-                      <a href="" class="btn btn-sm btn-primary ml-1">Cetak Daftar Nilai</a>
-                    </div>
+                    <form id="verifikasi-form" action="{{ route('seminarproposal.verifikasi_selesai', $data_seminar['id']) }}" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-sm btn-primary ml-3" onclick="return confirm('Verifikasi Seminar Proposal ?')"> Verifikasi Seminar Proposal Selesai
+                      </button>
+                    </form>
+                    <a href="{{ route('seminarproposal.cetak_nilai', $data_seminar['id']) }}" target="_black" class="btn btn-sm btn-primary ml-1">Cetak Daftar Nilai</a>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
