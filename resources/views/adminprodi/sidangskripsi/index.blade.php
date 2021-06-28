@@ -31,7 +31,7 @@
                   <th>Nama Mahasiswa</th>
                   <th>Judul Skripsi</th>
                   <th>Tanggal Pengajuan</th>
-                  <th>Persetujuan Pembimbing</th>
+                  <th>Status Sidang</th>
                   <th>Waktu Sidang</th>
                   <th>Aksi</th>
                 </tr>
@@ -46,7 +46,15 @@
                   <td>{{ $sidang['judul_skripsi']['nama_judul_skripsi']}}</td>
                   <td>{{ $sidang['tanggal_pengajuan_sidang_skripsi']}}</td>
                   <td>
-                    <span class="badge light badge-success">{{ $sidang['persetujuan_pembimbing_sidang_skripsi']}}</span>
+                    @if($sidang['status_sidang_skripsi'] == 'Pengajuan')
+                    <span class="badge light badge-primary">{{$sidang['status_sidang_skripsi']}}</span>
+                    @elseif ($sidang['status_sidang_skripsi'] == 'Selesai')
+                    <span class="badge light badge-success">{{$sidang['status_sidang_skripsi']}}</span>
+                    @elseif ($sidang['status_sidang_skripsi'] == 'Sedang Berlangsung')
+                    <span class="badge light badge-info">{{$sidang['status_sidang_skripsi']}}</span>
+                    @elseif ($sidang['status_sidang_skripsi'] == 'Belum Mulai')
+                    <span class="badge light badge-warning">{{$sidang['status_sidang_skripsi']}}</span>
+                    @endif
                   </td>
                   <td>
                     @if($sidang['waktu_sidang_skripsi'] == 'Belum Ditentukan')
@@ -69,7 +77,11 @@
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" target="_black" href="http://127.0.0.1:8000/api/v1/{{$sidang['file_sidang_skripsi']['url']}}">Lihat File</a>
-                        <a class="dropdown-item" href="{{ route('sidangskripsi.show', $sidang['id']) }}">Detail</a>
+                        @if($sidang['waktu_sidang_skripsi'] == 'Belum Ditentukan')
+                        <a class="dropdown-item" href="{{ route('sidangskripsi.edit', $sidang['id']) }}">Tentukan Waktu Sidang</a>
+                        @else
+                        <a class="dropdown-item" href="{{ route('sidangskripsi.hasil_sidang', $sidang['id']) }}">Lihat Hasil Sidang</a>
+                        @endif
                       </div>
                     </div>
                   </td>

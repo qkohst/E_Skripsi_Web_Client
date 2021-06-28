@@ -98,8 +98,14 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
 
 
     Route::resource('sidangskripsi', 'AdminProdi\SidangSkripsiController', [
-      'only' => ['index', 'show', 'edit']
+      'only' => ['index', 'edit', 'update']
     ]);
+    Route::get('sidangskripsi/{id}/hasil_sidang', 'AdminProdi\SidangSkripsiController@hasil_sidang')
+      ->name('sidangskripsi.hasil_sidang');
+    Route::post('sidangskripsi/{id}/verifikasi_selesai', 'AdminProdi\SidangSkripsiController@verifikasi_selesai')
+      ->name('sidangskripsi.verifikasi_selesai');
+    Route::get('sidangskripsi/{id}/cetak_nilai', 'AdminProdi\SidangSkripsiController@cetak_nilai')
+      ->name('sidangskripsi.cetak_nilai');
   });
 
   // Route Mahasiswa

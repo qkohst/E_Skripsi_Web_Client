@@ -143,10 +143,11 @@ class SeminarProposalController extends Controller
             '_method'   => 'PATCH',
         ]);
         if ($response->status() == 200) {
-            return redirect('/seminarproposal')->with('success', $response->json()['message']);
+            return back()->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }
+
     public function cetak_nilai($id)
     {
         $response = Http::get($this->_url . 'seminarproposal/' . $id . '/daftarnilai', [
