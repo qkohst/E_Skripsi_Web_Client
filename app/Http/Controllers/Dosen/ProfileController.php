@@ -41,51 +41,54 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        if ($request->hasFile('foto_dosen')) {
+            $foto_dosen               = request('foto_dosen');
+            $foto_dosen_path          = $foto_dosen->getPathname();
+            $foto_dosen_uploaded_name = $foto_dosen->getClientOriginalName();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            $file = fopen($foto_dosen_path, 'r');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            $response = Http::attach(
+                'foto_dosen',
+                $file,
+                $foto_dosen_uploaded_name
+            )->post($this->_url, [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user'),
+                'status_perkawinan_dosen' => $request->status_perkawinan_dosen,
+                'jenis_kelamin_dosen' => $request->jenis_kelamin_dosen,
+                'nama_ibu_dosen' => $request->nama_ibu_dosen,
+                'alamat_dosen' => $request->alamat_dosen,
+                'provinsi_dosen' => $request->provinsi_dosen,
+                'kabupaten_dosen' => $request->kabupaten_dosen,
+                'kecamatan_dosen' => $request->kecamatan_dosen,
+                'desa_dosen' => $request->desa_dosen,
+                'no_hp_dosen' => $request->no_hp_dosen,
+                'email_dosen' => $request->email_dosen,
+            ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            if ($response->status() == 200) {
+                return redirect('/dashboard')->with('success', $response->json()['message']);
+            }
+            return back()->with('toast_error', $response->json()['message']);
+        }
+        $response = Http::post($this->_url, [
+            'api_key' => $this->_api_key,
+            'api_token' => session('api_token_user'),
+            'status_perkawinan_dosen' => $request->status_perkawinan_dosen,
+            'jenis_kelamin_dosen' => $request->jenis_kelamin_dosen,
+            'nama_ibu_dosen' => $request->nama_ibu_dosen,
+            'alamat_dosen' => $request->alamat_dosen,
+            'provinsi_dosen' => $request->provinsi_dosen,
+            'kabupaten_dosen' => $request->kabupaten_dosen,
+            'kecamatan_dosen' => $request->kecamatan_dosen,
+            'desa_dosen' => $request->desa_dosen,
+            'no_hp_dosen' => $request->no_hp_dosen,
+            'email_dosen' => $request->email_dosen,
+        ]);
+        if ($response->status() == 200) {
+            return redirect('/dashboard')->with('success', $response->json()['message']);
+        }
+        return back()->with('toast_error', $response->json()['message']);
     }
 }

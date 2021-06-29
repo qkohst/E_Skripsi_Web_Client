@@ -40,7 +40,33 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::asForm()->post($this->_url, [
+        if ($request->hasFile('foto_admin_prodi')) {
+            $foto_admin_prodi               = request('foto_admin_prodi');
+            $foto_admin_prodi_path          = $foto_admin_prodi->getPathname();
+            $foto_admin_prodi_uploaded_name = $foto_admin_prodi->getClientOriginalName();
+
+            $file = fopen($foto_admin_prodi_path, 'r');
+
+            $response = Http::attach(
+                'foto_admin_prodi',
+                $file,
+                $foto_admin_prodi_uploaded_name
+            )->post($this->_url, [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user'),
+                'tempat_lahir_admin_prodi' => $request->tempat_lahir_admin_prodi,
+                'tanggal_lahir_admin_prodi' => $request->tanggal_lahir_admin_prodi,
+                'jenis_kelamin_admin_prodi' => $request->jenis_kelamin_admin_prodi,
+                'email_admin_prodi' => $request->email_admin_prodi,
+                'no_hp_admin_prodi' => $request->no_hp_admin_prodi,
+            ]);
+
+            if ($response->status() == 200) {
+                return redirect('/dashboard')->with('success', $response->json()['message']);
+            }
+            return back()->with('toast_error', $response->json()['message']);
+        }
+        $response = Http::post($this->_url, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             'tempat_lahir_admin_prodi' => $request->tempat_lahir_admin_prodi,
@@ -48,12 +74,10 @@ class ProfileController extends Controller
             'jenis_kelamin_admin_prodi' => $request->jenis_kelamin_admin_prodi,
             'email_admin_prodi' => $request->email_admin_prodi,
             'no_hp_admin_prodi' => $request->no_hp_admin_prodi,
-            'foto_admin_prodi' => $request->file('foto_admin_prodi'),
         ]);
-        dd($response->json());
-        // if ($response->status() == 200) {
-        //     return back()->with('success', $response->json()['message']);
-        // }
-        // return back()->with('toast_error', $response->json()['message']);
+        if ($response->status() == 200) {
+            return redirect('/dashboard')->with('success', $response->json()['message']);
+        }
+        return back()->with('toast_error', $response->json()['message']);
     }
 }

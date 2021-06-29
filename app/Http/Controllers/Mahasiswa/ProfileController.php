@@ -40,7 +40,38 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::asForm()->post($this->_url, [
+        if ($request->hasFile('foto_mahasiswa')) {
+            $foto_mahasiswa               = request('foto_mahasiswa');
+            $foto_mahasiswa_path          = $foto_mahasiswa->getPathname();
+            $foto_mahasiswa_uploaded_name = $foto_mahasiswa->getClientOriginalName();
+
+            $file = fopen($foto_mahasiswa_path, 'r');
+
+            $response = Http::attach(
+                'foto_mahasiswa',
+                $file,
+                $foto_mahasiswa_uploaded_name
+            )->post($this->_url, [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user'),
+                'status_perkawinan_mahasiswa' => $request->status_perkawinan_mahasiswa,
+                'jenis_kelamin_mahasiswa' => $request->jenis_kelamin_mahasiswa,
+                'nama_ibu_mahasiswa' => $request->nama_ibu_mahasiswa,
+                'alamat_mahasiswa' => $request->alamat_mahasiswa,
+                'provinsi_mahasiswa' => $request->provinsi_mahasiswa,
+                'kabupaten_mahasiswa' => $request->kabupaten_mahasiswa,
+                'kecamatan_mahasiswa' => $request->kecamatan_mahasiswa,
+                'desa_mahasiswa' => $request->desa_mahasiswa,
+                'no_hp_mahasiswa' => $request->no_hp_mahasiswa,
+                'email_mahasiswa' => $request->email_mahasiswa,
+            ]);
+
+            if ($response->status() == 200) {
+                return redirect('/dashboard')->with('success', $response->json()['message']);
+            }
+            return back()->with('toast_error', $response->json()['message']);
+        }
+        $response = Http::post($this->_url, [
             'api_key' => $this->_api_key,
             'api_token' => session('api_token_user'),
             'status_perkawinan_mahasiswa' => $request->status_perkawinan_mahasiswa,
@@ -53,57 +84,10 @@ class ProfileController extends Controller
             'desa_mahasiswa' => $request->desa_mahasiswa,
             'no_hp_mahasiswa' => $request->no_hp_mahasiswa,
             'email_mahasiswa' => $request->email_mahasiswa,
-            'foto_mahasiswa' => $request->file('foto_mahasiswa'),
         ]);
-        dd($response->json());
-        // if ($response->status() == 200) {
-        //     return back()->with('success', $response->json()['message']);
-        // }
-        // return back()->with('toast_error', $response->json()['message']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($response->status() == 200) {
+            return redirect('/dashboard')->with('success', $response->json()['message']);
+        }
+        return back()->with('toast_error', $response->json()['message']);
     }
 }
