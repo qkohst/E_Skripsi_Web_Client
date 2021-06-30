@@ -14,15 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Route::get('/', function () {
-//     return view('auth/login');
-//     return view('dashboard/index');
-//     return view('admin/profile/index');
-//     return view('admin/fakultas/index');
-//     return view('admin/fakultas/create');
-//     return view('admin/fakultas/edit');
-// });
-
 Route::get('/', 'AuthController@index')->name('login');
 Route::post('/login', 'AuthController@login')->name('login');
 
@@ -31,6 +22,11 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
   Route::post('/gantipassword', 'AuthController@ganti_password')->name('ganti_password');
   Route::get('/dashboard', 'DashboardController@index');
 
+  // Route Unutuk Ajax 
+  Route::get('getProdi/ajax/{id}', 'getAPiController@ajax_prodi');
+  Route::get('getKabupaten/ajax/{id}', 'getAPiController@ajax_kabupaten');
+  Route::get('getKecamatan/ajax/{id}', 'getAPiController@ajax_kecamatan');
+  Route::get('getDesa/ajax/{id}', 'getAPiController@ajax_desa');
 
   // Route Admin 
   Route::group(['middleware' => 'CekRoleMiddleware:Admin'], function () {

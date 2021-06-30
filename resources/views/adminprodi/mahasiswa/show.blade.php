@@ -115,7 +115,7 @@
                           </tr>
                           <tr class="text-left">
                             <td>Alamat</td>
-                            <td>: {{$data_mahasiswa['alamat_mahasiswa']}} Ds. {{$data_mahasiswa['desa_mahasiswa']}} Kec. {{$data_mahasiswa['kecamatan_mahasiswa']}} Kab. {{$data_mahasiswa['kabupaten_mahasiswa']}}</td>
+                            <td>: {{$data_mahasiswa['alamat_mahasiswa']}} Ds. {{$data_mahasiswa['desa_mahasiswa']['nama']}} Kec. {{$data_mahasiswa['kecamatan_mahasiswa']['nama']}} {{$data_mahasiswa['kabupaten_mahasiswa']['nama']}}</td>
                           </tr>
                           <tr class="text-left">
                             <td>Email</td>

@@ -119,7 +119,7 @@
                           </tr>
                           <tr class="text-left">
                             <td>Alamat</td>
-                            <td>: {{$data_dosen['alamat_dosen']}} Ds. {{$data_dosen['desa_dosen']}} Kec. {{$data_dosen['kecamatan_dosen']}} Kab. {{$data_dosen['kabupaten_dosen']}}</td>
+                            <td>: {{$data_dosen['alamat_dosen']}} Ds. {{$data_dosen['desa_dosen']['nama']}} Kec. {{$data_dosen['kecamatan_dosen']['nama']}} {{$data_dosen['kabupaten_dosen']['nama']}}</td>
                           </tr>
                           <tr class="text-left">
                             <td>Email</td>

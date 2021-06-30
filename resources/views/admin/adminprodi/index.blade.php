@@ -33,7 +33,7 @@
                   <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                   </button>
                 </div>
-                <form action="{{ route('adminprodi.store') }}" method="POST">
+                <form action="{{ route('adminprodi.store') }}" enctype="multipart/form-data" method="POST">
                   @csrf
                   <div class="modal-body">
                     <div class="row">
@@ -44,7 +44,9 @@
                             <div class="form-group">
                               <select class="form-control" name="kode_fakultas" id="sel1" required>
                                 <option value="">-- Pilih Fakultas --</option>
-                                <option value="#">data</option>
+                                @foreach($data_fakultas as $fakultas)
+                                <option value="{{$fakultas['id']}}">{{$fakultas['kode_fakultas']}} | {{$fakultas['nama_fakultas']}}</option>
+                                @endforeach
                               </select>
                             </div>
                           </div>
@@ -55,9 +57,8 @@
                           <label class="col-sm-3 col-form-label">Program Studi</label>
                           <div class="col-sm-9">
                             <div class="form-group">
-                              <select class="form-control" name="kode_fakultas" id="sel1" required>
+                              <select class="form-control" name="program_studi_id_program_studi" id="sel1" required>
                                 <option value="">-- Pilih Prodi --</option>
-                                <option value="#">data</option>
                               </select>
                             </div>
                           </div>
@@ -110,8 +111,8 @@
                             <div class="form-group">
                               <select class="form-control" name="jenis_kelamin_admin_prodi" id="sel1" required>
                                 <option value="">-- Pilih Jenis Kelamin --</option>
-                                <option value="#">Laki-Laki</option>
-                                <option value="#">Perempuan</option>
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
                               </select>
                             </div>
                           </div>
@@ -232,4 +233,32 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('ajax')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('select[name="kode_fakultas"]').on('change', function() {
+      var fakultas_id = $(this).val();
+      if (fakultas_id) {
+        $.ajax({
+          url: 'getProdi/ajax/' + fakultas_id,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            $('select[name="program_studi_id_program_studi"]').empty();
+            $.each(data, function(i, data) {
+              $('select[name="program_studi_id_program_studi"]').append(
+                '<option value="' +
+                data.id + '">' + data.kode_program_studi + ' | ' + data.nama_program_studi + '</option>');
+            });
+          }
+        });
+      } else {
+        $('select[name="program_studi_id_program_studi"').empty();
+      }
+    });
+  });
+</script>
+
 @endsection

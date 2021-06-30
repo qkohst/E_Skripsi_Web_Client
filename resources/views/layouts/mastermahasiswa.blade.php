@@ -267,6 +267,7 @@
 
   @include('sweetalert::alert')
 
+  @yield('ajax')
 
 </body>
 

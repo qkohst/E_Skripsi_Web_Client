@@ -266,7 +266,7 @@
   <script src="/js/plugins-init/datatables.init.js"></script>
 
   @include('sweetalert::alert')
-
+  @yield('ajax')
 
 </body>
 

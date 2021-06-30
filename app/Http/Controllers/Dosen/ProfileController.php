@@ -28,7 +28,23 @@ class ProfileController extends Controller
         ]);
         if ($response->status() == 200) {
             $profile = $response->json()['data'];
-            return view('dosen.profile.index', compact('profile'));
+            $response_provinsi = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+            $response_kabupaten = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota', [
+                'id_provinsi' => $profile['provinsi_dosen']['id'],
+            ]);
+            $response_kecamatan = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kecamatan', [
+                'id_kota' => $profile['kabupaten_dosen']['id'],
+            ]);
+            $response_desa = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan', [
+                'id_kecamatan' => $profile['kecamatan_dosen']['id'],
+            ]);
+
+            $data_provinsi = $response_provinsi->json()['provinsi'];
+            $data_kabupaten = $response_kabupaten->json()['kota_kabupaten'];
+            $data_kecamatan = $response_kecamatan->json()['kecamatan'];
+            $data_desa = $response_desa->json()['kelurahan'];
+
+            return view('dosen.profile.index', compact('profile', 'data_provinsi', 'data_kabupaten', 'data_kecamatan', 'data_desa'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }

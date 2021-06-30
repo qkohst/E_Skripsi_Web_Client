@@ -27,7 +27,6 @@ class FakultasController extends Controller
         ]);
         if ($response->status() == 200) {
             $data_fakultas = $response->json()['data'];
-
             return view('admin.fakultas.index', compact('data_fakultas'));
         }
         return back()->with('toast_error', $response->json()['message']);

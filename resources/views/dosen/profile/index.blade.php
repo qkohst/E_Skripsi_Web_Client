@@ -21,8 +21,11 @@
         <div class="col-xl-12 col-lg-6 ">
           <div class="card h-auto">
             <div class="card-body text-center">
-              <img src="http://127.0.0.1:8000/api/v1/{{$profile['foto_dosen']['url']}}" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
-              <h4 class="text-black font-w600">{{$profile['nama_dosen']}}</h4>
+              @if(is_null($profile['foto_dosen']['nama_file']))
+              <img src="/images/profile/profile-user.png" width="150" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
+              @else
+              <img src="http://127.0.0.1:8000/api/v1/{{$profile['foto_dosen']['url']}}" width="150" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
+              @endif <h4 class="text-black font-w600">{{$profile['nama_dosen']}}</h4>
               <span>({{$profile['program_studi']['nama_program_studi']}})</span>
 
               <table class="table mt-3">
@@ -113,7 +116,7 @@
                           </tr>
                           <tr class="text-left">
                             <td>Alamat</td>
-                            <td>: {{$profile['alamat_dosen']}} Ds. {{$profile['desa_dosen']}} Kec. {{$profile['kecamatan_dosen']}} Kab. {{$profile['kabupaten_dosen']}}</td>
+                            <td>: {{$profile['alamat_dosen']}} Ds. {{$profile['desa_dosen']['nama']}} Kec. {{$profile['kecamatan_dosen']['nama']}} {{$profile['kabupaten_dosen']['nama']}}</td>
                           </tr>
                           <tr class="text-left">
                             <td>Email</td>
@@ -179,29 +182,41 @@
                           <div class="form-group col-md-6">
                             <label>Provinsi</label>
                             <select name="provinsi_dosen" class="form-control" required>
-                              <option value="{{$profile['provinsi_dosen']}}" selected>{{$profile['provinsi_dosen']}}</option>
-                              <option value="">Tambahkan Data Dari Api Daerah Indonesia</option>
+                              <option value="" @if (is_null($profile['provinsi_dosen']['id'])) selected @endif>-- Pilih Provinsi --</option>
+                              <option value="{{$profile['provinsi_dosen']['id']}}" @if (!is_null($profile['provinsi_dosen']['id'])) selected @endif>{{$profile['provinsi_dosen']['nama']}}</option>
+                              @foreach($data_provinsi as $provinsi)
+                              <option value="{{$provinsi['id']}}">{{$provinsi['nama']}}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group col-md-6">
                             <label>Kabupaten / Kota</label>
                             <select name="kabupaten_dosen" class="form-control" required>
-                              <option value="{{$profile['kabupaten_dosen']}}" selected>{{$profile['kabupaten_dosen']}}</option>
-                              <option value="">Tambahkan Data Dari Api Daerah Indonesia</option>
+                              <option value="" @if (is_null($profile['kabupaten_dosen']['id'])) selected @endif>-- Pilih Kabupaten / Kota --</option>
+                              <option value="{{$profile['kabupaten_dosen']['id']}}" @if (!is_null($profile['kabupaten_dosen']['id'])) selected @endif>{{$profile['kabupaten_dosen']['nama']}}</option>
+                              @foreach($data_kabupaten as $kabupaten)
+                              <option value="{{$kabupaten['id']}}">{{$kabupaten['nama']}}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group col-md-6">
                             <label>Kecamatan</label>
                             <select name="kecamatan_dosen" class="form-control" required>
-                              <option value="{{$profile['kecamatan_dosen']}}" selected>{{$profile['kecamatan_dosen']}}</option>
-                              <option value="">Tambahkan Data Dari Api Daerah Indonesia</option>
+                              <option value="" @if (is_null($profile['kecamatan_dosen']['id'])) selected @endif>-- Pilih Kecamatan --</option>
+                              <option value="{{$profile['kecamatan_dosen']['id']}}" @if (!is_null($profile['kecamatan_dosen']['id'])) selected @endif>{{$profile['kecamatan_dosen']['nama']}}</option>
+                              @foreach($data_kecamatan as $kecamatan)
+                              <option value="{{$kecamatan['id']}}">{{$kecamatan['nama']}}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group col-md-6">
                             <label>Desa / Kelurahan</label>
                             <select name="desa_dosen" class="form-control" required>
-                              <option value="{{$profile['desa_dosen']}}" selected>{{$profile['desa_dosen']}}</option>
-                              <option value="">Tambahkan Data Dari Api Daerah Indonesia</option>
+                              <option value="" @if (is_null($profile['desa_dosen']['id'])) selected @endif>-- Pilih Desa / Kelurahan --</option>
+                              <option value="{{$profile['desa_dosen']['id']}}" @if (!is_null($profile['desa_dosen']['id'])) selected @endif>{{$profile['desa_dosen']['nama']}}</option>
+                              @foreach($data_desa as $desa)
+                              <option value="{{$desa['id']}}">{{$desa['nama']}}</option>
+                              @endforeach
                             </select>
                           </div>
                           <div class="form-group col-md-6">
@@ -269,4 +284,75 @@
     </div>
   </div>
 </div>
+@endsection
+
+
+@section('ajax')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('select[name="provinsi_dosen"]').on('change', function() {
+      var provinsi_id = $(this).val();
+      if (provinsi_id) {
+        $.ajax({
+          url: 'getKabupaten/ajax/' + provinsi_id,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            $('select[name="kabupaten_dosen"]').empty();
+            $.each(data, function(i, data) {
+              $('select[name="kabupaten_dosen"]').append(
+                '<option value="' +
+                data.id + '">' + data.nama + '</option>');
+            });
+          }
+        });
+      } else {
+        $('select[name="kabupaten_dosen"').empty();
+      }
+    });
+
+    $('select[name="kabupaten_dosen"]').on('change', function() {
+      var kabupaten_id = $(this).val();
+      if (kabupaten_id) {
+        $.ajax({
+          url: 'getKecamatan/ajax/' + kabupaten_id,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            $('select[name="kecamatan_dosen"]').empty();
+            $.each(data, function(i, data) {
+              $('select[name="kecamatan_dosen"]').append(
+                '<option value="' +
+                data.id + '">' + data.nama + '</option>');
+            });
+          }
+        });
+      } else {
+        $('select[name="kecamatan_dosen"').empty();
+      }
+    });
+
+    $('select[name="kecamatan_dosen"]').on('change', function() {
+      var kecamatan_id = $(this).val();
+      if (kecamatan_id) {
+        $.ajax({
+          url: 'getDesa/ajax/' + kecamatan_id,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            $('select[name="desa_dosen"]').empty();
+            $.each(data, function(i, data) {
+              $('select[name="desa_dosen"]').append(
+                '<option value="' +
+                data.id + '">' + data.nama + '</option>');
+            });
+          }
+        });
+      } else {
+        $('select[name="desa_dosen"').empty();
+      }
+    });
+  });
+</script>
+
 @endsection
