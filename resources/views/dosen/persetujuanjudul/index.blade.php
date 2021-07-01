@@ -196,7 +196,7 @@
                             <div class="form-group col-md-12">
                               <label>Status</label>
                               <select id="status" name="persetujuan_dosen_pembimbing" class="form-control" required>
-                                <option value="Antrian" @if ($judul['persetujuan_dosen_pembimbing']=='Antrian' ) selected @endif>Antrian</option>
+                                <option value="">-- Pilih Status --</option>
                                 <option value="Disetujui" @if ($judul['persetujuan_dosen_pembimbing']=='Disetujui' ) selected @endif>Disetujui</option>
                                 <option value="Ditolak" @if ($judul['persetujuan_dosen_pembimbing']=='Ditolak' ) selected @endif>Ditolak</option>
                               </select>
@@ -205,7 +205,7 @@
                           <div class="form-row">
                             <div class="form-group col-md-12">
                               <label>Catatan</label>
-                              <textarea class="form-control" name="catatan_dosen_pembimbing" rows="3">{{$judul['catatan_dosen_pembimbing']}}</textarea>
+                              <textarea class="form-control" name="catatan_dosen_pembimbing" rows="3" required>{{$judul['catatan_dosen_pembimbing']}}</textarea>
                             </div>
                           </div>
                         </div>

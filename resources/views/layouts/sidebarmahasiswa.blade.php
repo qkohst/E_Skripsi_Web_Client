@@ -5,7 +5,7 @@
         <span class="nav-text">Dashboard</span>
       </a>
     </li>
-    <li><a href="#" class="ai-icon" aria-expanded="false">
+    <li><a href="{{ route('persyaratanskripsi.index') }}" class="ai-icon" aria-expanded="false">
         <i class="flaticon-381-list-1"></i>
         <span class="nav-text">Persyaratan Skripsi</span>
       </a>
