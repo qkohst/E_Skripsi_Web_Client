@@ -25,7 +25,7 @@
       </a>
       <ul aria-expanded="false">
         <li><a href="{{ route('pengajuanbimbinganskripsi.index') }}">Bimbingan Skripsi</a></li>
-        <li><a href="#">Sidang Skripsi</a></li>
+        <li><a href="{{ route('pengajuansidang.index') }}">Sidang Skripsi</a></li>
       </ul>
     </li>
   </ul>
