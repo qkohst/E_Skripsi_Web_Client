@@ -24,7 +24,7 @@
         <span class="nav-text">Skripsi</span>
       </a>
       <ul aria-expanded="false">
-        <li><a href="#">Bimbingan Skripsi</a></li>
+        <li><a href="{{ route('pengajuanbimbinganskripsi.index') }}">Bimbingan Skripsi</a></li>
         <li><a href="#">Sidang Skripsi</a></li>
       </ul>
     </li>

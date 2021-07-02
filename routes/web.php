@@ -129,6 +129,12 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
     ]);
     Route::get('pengajuanseminar/cetaknilai', 'Mahasiswa\PengajuanSeminarController@cetaknilai')
       ->name('pengajuanseminar.cetaknilai');
+
+    Route::resource('pengajuanbimbinganskripsi', 'Mahasiswa\PengajuanBimbinganSkripsiController', [
+      'only' => ['index', 'store']
+    ]);
+    Route::get('pengajuanbimbinganskripsi/beritaacara', 'Mahasiswa\PengajuanBimbinganSkripsiController@beritaacara')
+      ->name('pengajuanbimbinganskripsi.beritaacara');
   });
 
   // Route Dosen
