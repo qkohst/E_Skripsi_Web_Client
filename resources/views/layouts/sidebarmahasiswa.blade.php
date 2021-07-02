@@ -15,7 +15,7 @@
         <span class="nav-text">Proposal Skripsi</span>
       </a>
       <ul aria-expanded="false">
-        <li><a href="#">Bimbingan Proposal</a></li>
+        <li><a href="{{ route('pengajuanbimbinganproposal.index') }}">Bimbingan Proposal</a></li>
         <li><a href="#">Seminar Proposal</a></li>
       </ul>
     </li>

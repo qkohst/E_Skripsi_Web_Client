@@ -22,7 +22,7 @@
             <h4 class="card-title">Data Mahasiswa</h4>
           </div>
           <div class="mt-3 mt-sm-0">
-            <button type="button" class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modalCreate">Tambah</button>
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalCreate">Tambah</button>
           </div>
           <!-- Modal -->
           <div class="modal fade" id="modalCreate">

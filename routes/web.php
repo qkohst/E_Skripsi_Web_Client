@@ -117,6 +117,12 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
       ->name('persyaratanskripsi.juduldosbing1');
     Route::post('persyaratanskripsi/juduldosbing2', 'Mahasiswa\PersyaratanSkripsiController@juduldosbing2')
       ->name('persyaratanskripsi.juduldosbing2');
+
+    Route::resource('pengajuanbimbinganproposal', 'Mahasiswa\PengajuanBimbinganProposalController', [
+      'only' => ['index', 'store']
+    ]);
+    Route::get('pengajuanbimbinganproposal/beritaacara', 'Mahasiswa\PengajuanBimbinganProposalController@beritaacara')
+      ->name('pengajuanbimbinganproposal.beritaacara');
   });
 
   // Route Dosen
