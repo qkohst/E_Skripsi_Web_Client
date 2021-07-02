@@ -16,7 +16,7 @@
       </a>
       <ul aria-expanded="false">
         <li><a href="{{ route('pengajuanbimbinganproposal.index') }}">Bimbingan Proposal</a></li>
-        <li><a href="#">Seminar Proposal</a></li>
+        <li><a href="{{ route('pengajuanseminar.index') }}">Seminar Proposal</a></li>
       </ul>
     </li>
     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

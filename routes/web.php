@@ -123,6 +123,12 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
     ]);
     Route::get('pengajuanbimbinganproposal/beritaacara', 'Mahasiswa\PengajuanBimbinganProposalController@beritaacara')
       ->name('pengajuanbimbinganproposal.beritaacara');
+
+    Route::resource('pengajuanseminar', 'Mahasiswa\PengajuanSeminarController', [
+      'only' => ['index', 'store']
+    ]);
+    Route::get('pengajuanseminar/cetaknilai', 'Mahasiswa\PengajuanSeminarController@cetaknilai')
+      ->name('pengajuanseminar.cetaknilai');
   });
 
   // Route Dosen
