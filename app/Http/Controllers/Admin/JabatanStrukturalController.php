@@ -56,26 +56,6 @@ class JabatanStrukturalController extends Controller
         return back()->with('toast_error', $response->json()['message']);
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $response = Http::get($this->_url . 'jabatanstruktural/' . $id, [
-            'api_key' => $this->_api_key,
-            'api_token' => session('api_token_user'),
-        ]);
-        if ($response->status() == 200) {
-            $data_jabatanstruktural = $response->json()['data'];
-            return view('admin.jabatanstruktural.edit', compact('data_jabatanstruktural'));
-        }
-        return back()->with('toast_error', $response->json()['message']);
-    }
-
     /**
      * Update the specified resource in storage.
      *

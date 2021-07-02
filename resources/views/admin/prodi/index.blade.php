@@ -110,7 +110,7 @@
                   </td>
                   <td>
                     <div class="d-flex">
-                      <a href="{{ route('prodi.edit', $program_studi['id']) }}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                      <button type="button" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#modalEdit{{$program_studi['id']}}"><i class="fa fa-pencil"></i></button>
                       <form action="{{ route('prodi.destroy', $program_studi['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -119,6 +119,61 @@
                     </div>
                   </td>
                 </tr>
+                <!-- Modal Edit-->
+                <div class="modal fade" id="modalEdit{{$program_studi['id']}}">
+                  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Edit Data Program Studi</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="basic-form">
+                          <form action="{{ route('prodi.update', $program_studi['id']) }}" method="POST">
+                            {{ method_field('PATCH') }}
+                            @csrf
+                            <fieldset disabled>
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Kode Program Studi</label>
+                                <div class="col-sm-10">
+                                  <input type="number" class="form-control light" name="kode_program_studi" value="{{$program_studi['kode_program_studi']}}">
+                                </div>
+                              </div>
+                            </fieldset>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Nama Program Studi</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" name="nama_program_studi" value="{{$program_studi['nama_program_studi']}}" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Singkatan</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" name="singkatan_program_studi" value="{{$program_studi['singkatan_program_studi']}}" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Status</label>
+                              <div class="col-sm-10">
+                                <select id="status" name="status_program_studi" class="form-control" required>
+                                  <option value="">-- Pilih Status --</option>
+                                  <option value="Aktif" @if ($program_studi['status_program_studi']=='Aktif' ) selected @endif>Aktif</option>
+                                  <option value="Non Aktif" @if ($program_studi['status_program_studi']=='Non Aktif' ) selected @endif>Non Aktif</option>
+                                </select> </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <div class="col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 @endforeach
               </tbody>
             </table>

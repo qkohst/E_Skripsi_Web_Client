@@ -79,7 +79,7 @@
                   <td>{{ $jabatanstruktural['deskripsi_jabatan_struktural']}}</td>
                   <td>
                     <div class="d-flex">
-                      <a href="{{ route('jabatanstruktural.edit', $jabatanstruktural['id']) }}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                      <button type="button" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#modalEdit{{$jabatanstruktural['id']}}"><i class="fa fa-pencil"></i></button>
                       <form action="{{ route('jabatanstruktural.destroy', $jabatanstruktural['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -88,6 +88,45 @@
                     </div>
                   </td>
                 </tr>
+                <!-- Modal Edit-->
+                <div class="modal fade" id="modalEdit{{$jabatanstruktural['id']}}">
+                  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Edit Data Jabatan Struktural</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="basic-form">
+                          <form action="{{ route('jabatanstruktural.update', $jabatanstruktural['id']) }}" method="POST">
+                            {{ method_field('PATCH') }}
+                            @csrf
+                            <fieldset disabled>
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Nama Jabatan</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control light" name="nama_jabatan_struktural" value="{{$jabatanstruktural['nama_jabatan_struktural']}}">
+                                </div>
+                              </div>
+                            </fieldset>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Deskripsi</label>
+                              <div class="col-sm-10">
+                                <textarea class="form-control" name="deskripsi_jabatan_struktural" style="height: 100px" required>{{$jabatanstruktural['deskripsi_jabatan_struktural']}}</textarea>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 @endforeach
               </tbody>
             </table>

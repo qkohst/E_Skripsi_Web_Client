@@ -35,19 +35,19 @@ Route::group(['middleware' => 'CekLoginMiddleware'], function () {
     ]);
 
     Route::resource('fakultas', 'Admin\FakultasController', [
-      'except' => ['create', 'show']
+      'except' => ['create', 'show', 'edit']
     ]);
 
     Route::resource('prodi', 'Admin\ProdiController', [
-      'except' => ['create', 'show']
+      'except' => ['create', 'show', 'edit']
     ]);
 
     Route::resource('jabatanstruktural', 'Admin\JabatanStrukturalController', [
-      'except' => ['create', 'show']
+      'except' => ['create', 'show', 'edit']
     ]);
 
     Route::resource('jabatanfungsional', 'Admin\JabatanFungsionalController', [
-      'except' => ['create', 'show']
+      'except' => ['create', 'show', 'edit']
     ]);
 
     Route::resource('adminprodi', 'Admin\AdminProdiController', [

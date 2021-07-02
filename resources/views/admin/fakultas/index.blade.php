@@ -95,7 +95,7 @@
                   </td>
                   <td>
                     <div class="d-flex">
-                      <a href="{{ route('fakultas.edit', $fakultas['id']) }}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                      <button type="button" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#modalEdit{{$fakultas['id']}}"><i class="fa fa-pencil"></i></button>
                       <form action="{{ route('fakultas.destroy', $fakultas['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -104,6 +104,61 @@
                     </div>
                   </td>
                 </tr>
+                <!-- Modal Edit-->
+                <div class="modal fade" id="modalEdit{{$fakultas['id']}}">
+                  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Edit Data Fakultas</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="basic-form">
+                          <form action="{{ route('fakultas.update', $fakultas['id']) }}" method="POST">
+                            {{ method_field('PATCH') }}
+                            @csrf
+                            <fieldset disabled>
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Kode Fakultas</label>
+                                <div class="col-sm-10">
+                                  <input type="number" class="form-control light" name="kode_fakultas" value="{{$fakultas['kode_fakultas']}}">
+                                </div>
+                              </div>
+                            </fieldset>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Nama Fakultas</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" name="nama_fakultas" value="{{$fakultas['nama_fakultas']}}" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Singkatan</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" name="singkatan_fakultas" value="{{$fakultas['singkatan_fakultas']}}" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Status</label>
+                              <div class="col-sm-10">
+                                <select id="status" name="status_fakultas" class="form-control" required>
+                                  <option value="">-- Pilih Status --</option>
+                                  <option value="Aktif" @if ($fakultas['status_fakultas']=='Aktif' ) selected @endif>Aktif</option>
+                                  <option value="Non Aktif" @if ($fakultas['status_fakultas']=='Non Aktif' ) selected @endif>Non Aktif</option>
+                                </select> </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <div class="col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 @endforeach
               </tbody>
             </table>

@@ -56,25 +56,6 @@ class JabatanFungsionalController extends Controller
 
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $response = Http::get($this->_url . 'jabatanfungsional/' . $id, [
-            'api_key' => $this->_api_key,
-            'api_token' => session('api_token_user'),
-        ]);
-        if ($response->status() == 200) {
-            $data_jabatanfungsional = $response->json()['data'];
-            return view('admin.jabatanfungsional.edit', compact('data_jabatanfungsional'));
-        }
-        return back()->with('toast_error', $response->json()['message']);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

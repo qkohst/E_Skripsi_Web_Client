@@ -39,15 +39,6 @@ class ProdiController extends Controller
         return back()->with('toast_error', $response_prodi->json()['message']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -72,24 +63,6 @@ class ProdiController extends Controller
         return back()->with('toast_error', $response->json()['message']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $response = Http::get($this->_url . 'programstudi/' . $id, [
-            'api_key' => $this->_api_key,
-            'api_token' => session('api_token_user'),
-        ]);
-        if ($response->status() == 200) {
-            $data_prodi = $response->json()['data'];
-            return view('admin.prodi.edit', compact('data_prodi'));
-        }
-        return back()->with('toast_error', $response->json()['message']);
-    }
 
     /**
      * Update the specified resource in storage.
