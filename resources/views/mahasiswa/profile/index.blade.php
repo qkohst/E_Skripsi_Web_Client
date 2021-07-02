@@ -152,6 +152,19 @@
                             </select>
                           </div>
                           <div class="form-group col-md-6">
+                            <label>Agama</label>
+                            <select id="agama_mahasiswa" name="agama_mahasiswa" class="form-control" required>
+                              <option value="">-- Pilih Agama --</option>
+                              <option value="Islam" @if ($profile['agama_mahasiswa']=='Islam' ) selected @endif>Islam</option>
+                              <option value="Protestan" @if ($profile['agama_mahasiswa']=='Protestan' ) selected @endif>Protestan</option>
+                              <option value="Katolik" @if ($profile['agama_mahasiswa']=='Katolik' ) selected @endif>Katolik</option>
+                              <option value="Hindu" @if ($profile['agama_mahasiswa']=='Hindu' ) selected @endif>Hindu</option>
+                              <option value="Budha" @if ($profile['agama_mahasiswa']=='Budha' ) selected @endif>Budha</option>
+                              <option value="Khonghucu" @if ($profile['agama_mahasiswa']=='Khonghucu' ) selected @endif>Khonghucu</option>
+                              <option value="Kepercayaan" @if ($profile['agama_mahasiswa']=='Kepercayaan' ) selected @endif>Kepercayaan</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-6">
                             <label>Jenis Kelamin</label>
                             <select id="jenis_kelamin" name="jenis_kelamin_mahasiswa" class="form-control" required>
                               <option value="">-- Pilih Data --</option>
@@ -215,7 +228,7 @@
                             <label>Email</label>
                             <input type="email" class="form-control" name="email_mahasiswa" value="{{$profile['email_mahasiswa']}}" required>
                           </div>
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-md-12">
                             <label>Foto</label>
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" name="foto_mahasiswa" id="customFile" accept="image/*">
