@@ -27,7 +27,7 @@
                     @csrf
                     <div class="form-group">
                       <label class="mb-1"><strong>Username</strong></label>
-                      <input type="text" class="form-control" name="username" placeholder="NPM atau NIDN" value="{{ old('username') }}" required>
+                      <input type="text" class="form-control" name="username" placeholder="username" value="{{ old('username') }}" required>
                     </div>
                     <div class="form-group">
                       <label class="mb-1"><strong>Password</strong></label>
@@ -41,7 +41,26 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <a href="page-forgot-password.html">Lupa Password ?</a>
+                        <a data-target="#lupaPassword" data-toggle="modal" href="#lupaPassword">Lupa Password ?</a>
+                      </div>
+                      <div class="modal fade" id="lupaPassword">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Lupa Password ?</h5>
+                              <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>
+                                Jika anda login sebagai <b>Mahasiswa atau Dosen</b>, silahkan hubungi <b>admin prodi</b> untuk melakukan reset password.
+                              </p>
+                              <p>
+                                Jika anda login sebagai <b>Admin Prodi</b>, silahkan hubungi <b>admin</b> untuk melakukan reset password.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="text-center">

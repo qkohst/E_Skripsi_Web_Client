@@ -170,8 +170,9 @@ class AdminProdiController extends Controller
             '_method'   => 'PATCH',
             'nidn_admin_prodi' => $request->nidn_admin_prodi,
         ]);
+        // dd($response->status());
         if ($response->status() == 205) {
-            return back('/adminprodi')->with('success', $response->json()['message']);
+            return back()->with('success', $response->json()['message']);
         }
         return back()->with('toast_error', $response->json()['message']);
     }

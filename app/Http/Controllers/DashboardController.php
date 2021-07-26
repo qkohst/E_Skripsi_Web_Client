@@ -23,6 +23,7 @@ class DashboardController extends Controller
             ]);
             $avatar = $response->json()['data']['foto_admin'];
             session([
+                'avatar_name' => $avatar['nama_file'],
                 'avatar_user' => $avatar['url']
             ]);
             return view('dashboard.admin');
@@ -33,6 +34,7 @@ class DashboardController extends Controller
             ]);
             $avatar = $response->json()['data']['foto_admin_prodi'];
             session([
+                'avatar_name' => $avatar['nama_file'],
                 'avatar_user' => $avatar['url']
             ]);
             return view('dashboard.adminprodi');
@@ -43,6 +45,7 @@ class DashboardController extends Controller
             ]);
             $avatar = $response->json()['data']['foto_mahasiswa'];
             session([
+                'avatar_name' => $avatar['nama_file'],
                 'avatar_user' => $avatar['url']
             ]);
             return view('dashboard.mahasiswa');
@@ -53,6 +56,7 @@ class DashboardController extends Controller
             ]);
             $avatar = $response->json()['data']['foto_dosen'];
             session([
+                'avatar_name' => $avatar['nama_file'],
                 'avatar_user' => $avatar['url']
             ]);
             return view('dashboard.dosen');
