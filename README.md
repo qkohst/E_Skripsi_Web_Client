@@ -1,3 +1,23 @@
+## RESTful APi Web Client
+This is the result of implementing the Unirow Tuban E-Thesis RESTful API into a website-based system
+
+### Features of this system include :
+1. Multi user (Admin, Admin Prodi, Mahasiswa, Dosen).
+2. Handling the process of submitting a thesis title.
+3. Handling the proposal guidance process.
+4. Handling the proposal seminar process.
+5. Handling the thesis guidance process.
+6. Handling the thesis trial process.
+7. Make reports on the results of seminar proposals and thesis hearings.
+
+### Screenshot
+![e_skripsi_webClient (2)](https://user-images.githubusercontent.com/57386598/129231508-3efa65a4-f4b7-40bf-aff7-746694b6cff4.png)
+
+![e_skripsi_webClient (3)](https://user-images.githubusercontent.com/57386598/129231505-a18ece64-6810-4891-91b3-9745334901a6.png)
+
+![e_skripsi_webClient (1)](https://user-images.githubusercontent.com/57386598/129231495-5c42b6f4-5ec5-4492-a17f-93bdf6fb0822.png)
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
