@@ -80,17 +80,13 @@ class VerifikasiSeminarController extends Controller
         ]);
 
         if ($response->status() == 200) {
-            if ($request->status_verifikasi_hasil_seminar_proposal == 'Lulus Seminar') {
-                $response_nilai = Http::get($this->_url . '/' . $id . '/nilai', [
-                    'api_key' => $this->_api_key,
-                    'api_token' => session('api_token_user')
-                ]);
-                $data_seminar = $response->json()['data'];
-                $data_nilai = $response_nilai->json()['data'];
-                return view('dosen.verifikasiseminar.inputnilai', compact('data_seminar', 'data_nilai'));
-            } elseif ($request->status_verifikasi_hasil_seminar_proposal == 'Revisi') {
-                return redirect('/verifikasiseminar')->with('success', $response->json()['message']);
-            }
+            $response_nilai = Http::get($this->_url . '/' . $id . '/nilai', [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user')
+            ]);
+            $data_seminar = $response->json()['data'];
+            $data_nilai = $response_nilai->json()['data'];
+            return view('dosen.verifikasiseminar.inputnilai', compact('data_seminar', 'data_nilai'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }

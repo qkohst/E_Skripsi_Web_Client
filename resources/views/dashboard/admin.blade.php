@@ -23,8 +23,8 @@
 								<h5 class="card-title mb-1"><small class="mb-0">Anda Login Sebagai {{Session::get('role_user')}}</small></h5>
 								<h4 class="card-title mb-1"><small class="mb-0">Di Sistem E-Skripsi Universitas PGRI Ronggolawe Tuban</small></h4>
 							</div>
-							<button type="button" class="btn btn-outline-light btn-sm mt-2"><span class="left"><i class="la la-play"></i>
-								</span>PANDUAN</button>
+							<a href="https://www.youtube.com/watch?v=fjaFFMlvVAY" target="_black" class="btn btn-outline-light btn-sm mt-2"><span class="left"><i class="la la-play"></i>
+								</span>PANDUAN</a>
 						</div>
 						<div class="col-md-3 hide-on-desktop">
 							<div class="card-action card-tabs mt-3 mt-sm-0">

@@ -68,12 +68,38 @@
             <div class="tab-content">
               <div class="tab-pane fade show" id="verifikasi" role="tabpanel">
                 <div class="pt-4">
-                  <h4>Verifikasi Sidang Skripsi</h4>
-                  <form class="mt-3" action="#" method="post">
+                  <div class="row">
+                    <div class="col">
+                      <h4>Verifikasi Hasil Sidang</h4>
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-info shadow btn-sm sharp float-right" data-toggle="modal" data-target="#infoModal1"><i class="fa fa-question"></i></button>
+                    </div>
+                    <!-- Modal Info-->
+                    <div class="modal fade" id="infoModal1">
+                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Informasi Verifikasi</h5>
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                              Silahkan lakukan verifikasi hasil sidang skripsi.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <form class="mt-3" action="{{ route('verifikasisidang.update', $data_sidang['id']) }}" method="post">
+                    {{ method_field('PATCH') }}
+                    @csrf
                     <div class="form-row">
                       <div class="form-group col-md-12">
                         <label>Status Verifikasi</label>
-                        <fieldset disabled>
+                        <fieldset>
                           <select id="status_verifikasi_hasil_sidang_skripsi" name="status_verifikasi_hasil_sidang_skripsi" class="form-control" required>
                             <option value="" @if ($data_sidang['status_verifikasi_hasil_sidang_skripsi']=='Belum Verifikasi' ) selected @endif>-- Pilih Status Verifikasi --</option>
                             <option value="Lulus Sidang" @if ($data_sidang['status_verifikasi_hasil_sidang_skripsi']=='Lulus Sidang' ) selected @endif>Lulus Sidang</option>
@@ -85,12 +111,12 @@
                     <div class="form-row">
                       <div class="form-group col-md-12">
                         <label>Catatan</label>
-                        <p>{!!$data_sidang['catatan_hasil_sidang_skripsi']!!}</p>
+                        <textarea class="summernote" name="catatan_hasil_sidang_skripsi" rows="3">{{$data_sidang['catatan_hasil_sidang_skripsi']}}</textarea>
                       </div>
                     </div>
                     <div class="form-row float-right">
                       <a href="{{ route('verifikasisidang.index') }}" class="btn btn-sm btn-danger light">Batal</a>
-                      <button type="submit" class="btn btn-sm btn-primary ml-2">Simpan</button>
+                      <button type="submit" class="btn btn-sm btn-primary ml-2">Selanjutnya</button>
                     </div>
                   </form>
                 </div>
@@ -115,7 +141,6 @@
                           </div>
                           <div class="modal-body">
                             <p>- Berilah skor pada butir Aspek Penilaian dengan cara mengisi angka pada skor dengan skala 0 - 100.</p>
-                            <p>- Proses penilaian <b>hanya dapat dilakukan 1 kali</b>, artinya anda tidak dapat mengubah nilai yang sudah diinputkan.</p>
                             <h5>A. Proses Bimbingan <small><i>(Khusus Dosen Pembimbing)</i></small></h5>
                             <div class="form-row">
                               <div class="form-group col-3">

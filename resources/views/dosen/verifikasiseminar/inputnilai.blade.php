@@ -68,12 +68,38 @@
             <div class="tab-content">
               <div class="tab-pane fade show" id="verifikasi" role="tabpanel">
                 <div class="pt-4">
-                  <h4>Verifikasi Hasil Seminar</h4>
-                  <form class="mt-3" action="#" method="post">
+                  <div class="row">
+                    <div class="col">
+                      <h4>Verifikasi Hasil Seminar</h4>
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-info shadow btn-sm sharp float-right" data-toggle="modal" data-target="#infoModal1"><i class="fa fa-question"></i></button>
+                    </div>
+                    <!-- Modal Info-->
+                    <div class="modal fade" id="infoModal1">
+                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Informasi Verifikasi</h5>
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                              Silahkan lakukan verifikasi hasil seminar proposal.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <form class="mt-3" action="{{ route('verifikasiseminar.update', $data_seminar['id']) }}" method="post">
+                    {{ method_field('PATCH') }}
+                    @csrf
                     <div class="form-row">
                       <div class="form-group col-md-12">
                         <label>Status Verifikasi</label>
-                        <fieldset disabled>
+                        <fieldset>
                           <select id="status_verifikasi_hasil_seminar_proposal" name="status_verifikasi_hasil_seminar_proposal" class="form-control" required>
                             <option value="" @if ($data_seminar['status_verifikasi_hasil_seminar_proposal']=='Belum Verifikasi' ) selected @endif>-- Pilih Status Verifikasi --</option>
                             <option value="Lulus Seminar" @if ($data_seminar['status_verifikasi_hasil_seminar_proposal']=='Lulus Seminar' ) selected @endif>Lulus Seminar</option>
@@ -85,12 +111,12 @@
                     <div class="form-row">
                       <div class="form-group col-md-12">
                         <label>Catatan</label>
-                        <p>{!!$data_seminar['catatan_hasil_seminar_proposal']!!}</p>
+                        <textarea class="summernote" name="catatan_hasil_seminar_proposal" rows="3">{{$data_seminar['catatan_hasil_seminar_proposal']}}</textarea>
                       </div>
                     </div>
                     <div class="form-row float-right">
                       <a href="{{ route('verifikasiseminar.index') }}" class="btn btn-sm btn-danger light">Batal</a>
-                      <button type="submit" class="btn btn-sm btn-primary ml-2">Simpan</button>
+                      <button type="submit" class="btn btn-sm btn-primary ml-2">Selanjutnya</button>
                     </div>
                   </form>
                 </div>
@@ -115,7 +141,6 @@
                           </div>
                           <div class="modal-body">
                             <p>- Berilah skor pada butir Aspek Penilaian dengan cara mengisi angka pada skor dengan skala 0 - 100.</p>
-                            <p>- Proses penilaian <b>hanya dapat dilakukan 1 kali</b>, artinya anda tidak dapat mengubah nilai yang sudah diinputkan.</p>
                             <h5>A. Proses Bimbingan <small><i>(Khusus Dosen Pembimbing)</i></small></h5>
                             <div class="form-row">
                               <div class="form-group col-3">

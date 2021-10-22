@@ -77,7 +77,7 @@
                     </div>
                     <!-- Modal Info-->
                     <div class="modal fade" id="infoModal">
-                      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title">Informasi Verifikasi</h5>
@@ -86,13 +86,7 @@
                           </div>
                           <div class="modal-body">
                             <p>
-                              Silahkan melakukan verifikasi hasil sidang skripsi.
-                            </p>
-                            <p>
-                              Jika anda memilih status verifikasi <b>"Revisi"</b>, anda dapat menuliskan point revisi pada kolom <b>Catatan</b> yang telah disediakan.
-                            </p>
-                            <p>
-                              Anda baru bisa melalukan input nilai ketika anda memilih status verifikasi <b>"Lulus Sidang"</b>.
+                              Silahkan lakukan verifikasi hasil sidang skripsi.
                             </p>
                           </div>
                         </div>
@@ -120,7 +114,7 @@
                     </div>
                     <div class="form-row float-right">
                       <a href="{{ route('verifikasisidang.index') }}" class="btn btn-sm btn-danger light">Batal</a>
-                      <button type="submit" class="btn btn-sm btn-primary ml-2">Simpan</button>
+                      <button type="submit" class="btn btn-sm btn-primary ml-2">Selanjutnya</button>
                     </div>
                   </form>
                 </div>

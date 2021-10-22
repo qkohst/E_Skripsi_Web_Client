@@ -79,7 +79,6 @@ class VerifikasiSidangController extends Controller
         ]);
 
         if ($response->status() == 200) {
-            if ($request->status_verifikasi_hasil_sidang_skripsi == 'Lulus Sidang') {
                 $response_nilai = Http::get($this->_url . '/' . $id . '/nilai', [
                     'api_key' => $this->_api_key,
                     'api_token' => session('api_token_user')
@@ -87,9 +86,6 @@ class VerifikasiSidangController extends Controller
                 $data_sidang = $response->json()['data'];
                 $data_nilai = $response_nilai->json()['data'];
                 return view('dosen.verifikasisidang.inputnilai', compact('data_sidang', 'data_nilai'));
-            } elseif ($request->status_verifikasi_hasil_sidang_skripsi == 'Revisi') {
-                return redirect('/verifikasisidang')->with('success', $response->json()['message']);
-            }
         }
         return back()->with('toast_error', $response->json()['message']);
     }
