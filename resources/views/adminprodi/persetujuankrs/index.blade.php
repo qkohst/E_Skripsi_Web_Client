@@ -72,7 +72,7 @@
                         </button>
                       </div>
                       <div class="modal-body text-center">
-                        <img src="http://127.0.0.1:8000/api/v1/{{ $persetujuan_krs['file_krs']['url']}}" class="img-fluid" alt="File KRS">
+                        <img src="http://103.179.57.109/api/v1/{{ $persetujuan_krs['file_krs']['url']}}" class="img-fluid" alt="File KRS">
                       </div>
                     </div>
                   </div>

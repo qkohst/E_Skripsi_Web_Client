@@ -55,7 +55,7 @@
                     @endif
                   </td>
                   <td>
-                    <a href="http://127.0.0.1:8000/api/v1/{{$proposal['file_bimbingan_proposal']['url']}}" target="_black" class="btn btn-xs btn-primary">Lihat File</a>
+                    <a href="http://103.179.57.109/api/v1/{{$proposal['file_bimbingan_proposal']['url']}}" target="_black" class="btn btn-xs btn-primary">Lihat File</a>
                   </td>
                   <td>
                     <div class="dropdown ml-3 ">

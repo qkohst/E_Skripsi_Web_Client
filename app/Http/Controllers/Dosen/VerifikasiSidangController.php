@@ -10,7 +10,7 @@ class VerifikasiSidangController extends Controller
 {
     public function __construct()
     {
-        $this->_url = 'http://127.0.0.1:8000/api/v1/dosen/sidangskripsi';
+        $this->_url = 'http://103.179.57.109/api/v1/dosen/sidangskripsi';
         $this->_api_key = 'VaKpEbkhOzZitGfIr1RxtGJkCwW43g7fiAnXhDkmyjUY5ezVFm4XdcbPwDBZ';
     }
 
@@ -79,13 +79,13 @@ class VerifikasiSidangController extends Controller
         ]);
 
         if ($response->status() == 200) {
-                $response_nilai = Http::get($this->_url . '/' . $id . '/nilai', [
-                    'api_key' => $this->_api_key,
-                    'api_token' => session('api_token_user')
-                ]);
-                $data_sidang = $response->json()['data'];
-                $data_nilai = $response_nilai->json()['data'];
-                return view('dosen.verifikasisidang.inputnilai', compact('data_sidang', 'data_nilai'));
+            $response_nilai = Http::get($this->_url . '/' . $id . '/nilai', [
+                'api_key' => $this->_api_key,
+                'api_token' => session('api_token_user')
+            ]);
+            $data_sidang = $response->json()['data'];
+            $data_nilai = $response_nilai->json()['data'];
+            return view('dosen.verifikasisidang.inputnilai', compact('data_sidang', 'data_nilai'));
         }
         return back()->with('toast_error', $response->json()['message']);
     }

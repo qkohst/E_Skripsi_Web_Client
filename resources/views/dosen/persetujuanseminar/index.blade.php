@@ -66,7 +66,7 @@
                         </svg>
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <a href="http://127.0.0.1:8000/api/v1/{{$seminar['file_persetujuan_seminar']['url']}}" target="_black" class="dropdown-item">Lihat File</a>
+                        <a href="http://103.179.57.109/api/v1/{{$seminar['file_persetujuan_seminar']['url']}}" target="_black" class="dropdown-item">Lihat File</a>
                         @if($seminar['status_persetujuan_seminar'] == 'Disetujui')
                         <button class="dropdown-item" data-toggle="modal" data-target="#modalDetail{{$seminar['id']}}">Lihat Detail</button>
                         @else

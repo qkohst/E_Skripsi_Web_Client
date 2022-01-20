@@ -25,7 +25,7 @@
               @if(is_null($data_adminprodi['foto_admin_prodi']['nama_file']))
               <img src="/images/profile/profile-user.png" width="150" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
               @else
-              <img src="http://127.0.0.1:8000/api/v1/{{$data_adminprodi['foto_admin_prodi']['url']}}" width="150" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
+              <img src="http://103.179.57.109/api/v1/{{$data_adminprodi['foto_admin_prodi']['url']}}" width="150" class="rounded-circle img-thumbnail  shadow mb-4" alt="" />
               @endif
 
               <h4 class="mb-1 text-black font-w600">{{$data_adminprodi['nama_admin_prodi']}}</h4>

@@ -76,7 +76,7 @@
                         </svg>
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" target="_black" href="http://127.0.0.1:8000/api/v1/{{$sidang['file_sidang_skripsi']['url']}}">Lihat File</a>
+                        <a class="dropdown-item" target="_black" href="http://103.179.57.109/api/v1/{{$sidang['file_sidang_skripsi']['url']}}">Lihat File</a>
                         @if($sidang['waktu_sidang_skripsi'] == 'Belum Ditentukan')
                         <a class="dropdown-item" href="{{ route('sidangskripsi.edit', $sidang['id']) }}">Tentukan Waktu Sidang</a>
                         @else

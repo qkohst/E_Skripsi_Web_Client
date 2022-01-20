@@ -10,7 +10,7 @@ class FakultasController extends Controller
 {
     public function __construct()
     {
-        $this->_url = 'http://127.0.0.1:8000/api/v1/admin/';
+        $this->_url = 'http://103.179.57.109/api/v1/admin/';
         $this->_api_key = 'VaKpEbkhOzZitGfIr1RxtGJkCwW43g7fiAnXhDkmyjUY5ezVFm4XdcbPwDBZ';
     }
 

@@ -177,11 +177,11 @@
                   <div class="header-info">
                     <span><strong>{{Session::get('nama_user')}}</strong></span>
                   </div>
-                  <!-- <img src="http://127.0.0.1:8000/api/v1/{{Session::get('avatar_user')}}" width="20" alt="" /> -->
+                  <!-- <img src="http://103.179.57.109/api/v1/{{Session::get('avatar_user')}}" width="20" alt="" /> -->
                   @if(is_null(Session::get('avatar_name')))
                   <img src="/images/profile/profile-user.png" width="20" alt="" class="bg-white" />
                   @else
-                  <img src="http://127.0.0.1:8000/api/v1/{{Session::get('avatar_user')}}" width="20" alt="" />
+                  <img src="http://103.179.57.109/api/v1/{{Session::get('avatar_user')}}" width="20" alt="" />
                   @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">

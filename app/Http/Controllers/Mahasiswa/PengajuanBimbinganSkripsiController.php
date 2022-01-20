@@ -11,7 +11,7 @@ class PengajuanBimbinganSkripsiController extends Controller
 {
     public function __construct()
     {
-        $this->_url = 'http://127.0.0.1:8000/api/v1/mahasiswa/bimbinganskripsi';
+        $this->_url = 'http://103.179.57.109/api/v1/mahasiswa/bimbinganskripsi';
         $this->_api_key = 'VaKpEbkhOzZitGfIr1RxtGJkCwW43g7fiAnXhDkmyjUY5ezVFm4XdcbPwDBZ';
     }
 
@@ -27,7 +27,7 @@ class PengajuanBimbinganSkripsiController extends Controller
             'api_token' => session('api_token_user'),
         ]);
         if ($response->status() == 200) {
-            $response_pembimbing = Http::get('http://127.0.0.1:8000/api/v1/mahasiswa/dosenpembimbing', [
+            $response_pembimbing = Http::get('http://103.179.57.109/api/v1/mahasiswa/dosenpembimbing', [
                 'api_key' => $this->_api_key,
                 'api_token' => session('api_token_user'),
             ]);

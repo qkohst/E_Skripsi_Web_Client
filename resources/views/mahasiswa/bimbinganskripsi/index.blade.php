@@ -117,7 +117,7 @@
                         </svg>
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <a href="http://127.0.0.1:8000/api/v1/{{$skripsi['file_bimbingan_skripsi']['url']}}" target="_black" class="dropdown-item">File Skripsi</a>
+                        <a href="http://103.179.57.109/api/v1/{{$skripsi['file_bimbingan_skripsi']['url']}}" target="_black" class="dropdown-item">File Skripsi</a>
                         <button class="dropdown-item" data-toggle="modal" data-target="#modalDetail{{$skripsi['id']}}">Detail</button>
                       </div>
                     </div>

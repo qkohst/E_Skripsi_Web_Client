@@ -80,7 +80,7 @@
                         </svg>
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <a href="http://127.0.0.1:8000/api/v1/{{$seminar['file_seminar_proposal']['url']}}" target="_black" class="dropdown-item">Lihat File Proposal</a>
+                        <a href="http://103.179.57.109/api/v1/{{$seminar['file_seminar_proposal']['url']}}" target="_black" class="dropdown-item">Lihat File Proposal</a>
                         @if($seminar['status_seminar_proposal'] == 'Sedang Berlangsung')
                         <a href="{{ route('verifikasiseminar.show', $seminar['id']) }}" class="dropdown-item">Verifikasi Hasil Seminar</a>
                         @endif
