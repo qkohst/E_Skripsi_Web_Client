@@ -10,6 +10,26 @@ This is the result of implementing the Unirow Tuban E-Thesis RESTful API into a 
 6. Handling the thesis trial process.
 7. Make reports on the results of seminar proposals and thesis hearings.
 
+### Demo
+
+https://bit.ly/e-skripsi-unirow
+
+#### 1. Admin 
+- username : 0710730001
+- password : 0710730001
+
+#### 2. Admin Prodi 
+- username : 1412000001
+- password : 1412000001
+
+#### 3. Dosen 
+- username : 0726047704
+- password : 0726047704
+
+#### 4. Mahasiswa 
+- username : 1412170001
+- password : 1412170001
+
 ### Screenshot
 ![e_skripsi_webClient (2)](https://user-images.githubusercontent.com/57386598/129231508-3efa65a4-f4b7-40bf-aff7-746694b6cff4.png)
 
